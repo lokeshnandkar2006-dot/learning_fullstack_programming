@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section</title>
+    <style>
+      * {
+        margin: 0; /* Default margins remove */
+        padding: 0; /* Default padding remove */
+        box-sizing: border-box; /* Box model sahi se kaam kare */
+      }
+
+      /* Hero section ka main container */
+      .hero-section {
+        width: 100%; /* Puri width le le */
+        height: 100vh; /* Viewport ki puri height - full screen */
+        background-image: url("https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600"); /* Background image */
+        background-size: cover; /* Image puri container ko cover kare */
+        background-position: center; /* Image center me ho */
+        position: relative; /* Ye parent hai absolute positioning ke liye */
+        overflow: hidden; /* Bahar ki content hide */
+      }
+
+      /* Dark overlay background image ke upar lagane ke liye */
+      .hero-overlay {
+        position: absolute; /* Parent ke relative to position hoga */
+        top: 0; /* Top se 0 distance */
+        left: 0; /* Left se 0 distance */
+        width: 100%; /* Puri width */
+        height: 100%; /* Puri height */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.6
+        ); /* Black color with 60% transparency - image ko thoda dark karega */
+        z-index: 1; /* Overlay image ke upar ho but content ke neeche */
+      }
+
+      /* Hero content container - text aur button */
+      .hero-content {
+        position: absolute; /* Overlay ke upar position karne ke liye */
+        top: 50%; /* Top se 50% neeche */
+        left:50%; /* Left se 50% right */
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Exact center me lana - khud ki width/height ka 50% wapas left aur up */
+        text-align: center; /* Text center me align */
+        color: white; /* Text color white */
+        z-index: 2; /* Content sabse upar dikhega */
+        width: 90%; /* Width 90% taaki sides pe space rahe */
+        max-width: 800px; /* Maximum width limit */
+      }
+
+      /* Main heading */
+      .hero-title {
+        font-size: 56px; /* Bahut bada font */
+        font-weight: bold; /* Bold text */
+        margin-bottom: 20px; /* Neeche space */
+        animation: fadeInDown 1s ease; /* Animation effect - 1 second me neeche se aayega */
+      }
+
+      /* Subtitle/description */
+      .hero-subtitle {
+        font-size: 20px; /* Medium font */
+        margin-bottom: 35px; /* Neeche space */
+        line-height: 1.6; /* Line spacing */
+        animation: fadeInUp 1s ease 0.3s backwards; /* Animation 0.3 second delay ke baad - upar se aayega */
+      }
+
+      /* CTA button */
+      .hero-btn {
+        background-color: #e74c3c; /* Red background */
+        color: white; /* White text */
+        padding: 18px 40px; /* Badi padding */
+        border: none; /* Border remove */
+        border-radius: 30px; /* Fully rounded */
+        font-size: 18px; /* Font size */
+        font-weight: bold; /* Bold text */
+        cursor: pointer; /* Pointer cursor */
+        transition: 0.3s; /* Smooth transitions */
+        animation: fadeInUp 1s ease 0.6s backwards; /* Animation 0.6s delay ke baad */
+      }
+
+      /* Button hover effect */
+      .hero-btn:hover {
+        background-color: #c0392b; /* Darker red */
+        transform: translateY(-3px) scale(1.05); /* Upar move + thoda bada */
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4); /* Red shadow */
+      }
+
+      /* Scroll indicator - neeche dikhane wala arrow */
+      .scroll-indicator {
+        position: absolute; /* Bottom pe position karna */
+        bottom: 80px; /* Bottom se 30px upar */
+        left: 50%; /* Center me */
+        transform: translateX(-50%); /* Exact center */
+        z-index: 2; /* Content ke level pe */
+        animation: bounce 2s infinite; /* Bounce animation continuously */
+      }
+
+      .scroll-indicator span {
+        color: white; /* Arrow color white */
+        font-size: 50px; /* Arrow bada */
+      }
+
+      /* Fade in from top animation */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0; /* Transparent se start */
+          transform: translateY(-200px); /* 30px upar se */
+        }
+        to {
+          opacity: 1; /* Fully visible */
+          transform: translateY(0); /* Normal position pe */
+        }
+      }
+
+      /* Fade in from bottom animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0; /* Transparent */
+          transform: translateY(150px); /* 30px neeche se */
+        }
+        to {
+          opacity: 1; /* Visible */
+          transform: translateY(0); /* Normal position */
+        }
+      }
+
+      /* Bounce animation for scroll indicator */
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0); /* Normal position */
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px); /* Upar jaye */
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px); /* Thoda upar */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section Container -->
+    <section class="hero-section">
+      <!-- Dark Overlay -->
+      <div class="hero-overlay"></div>
+
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <h1 class="hero-title">Learn Web Development</h1>
+        <p class="hero-subtitle">
+          Master HTML, CSS, and JavaScript with hands-on projects and build your
+          dream career in tech
+        </p>
+        <button class="hero-btn">Start Learning Now</button>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <span>↓</span>
+      </div>
+    </section>
+  </body>
+</html>
+

@@ -1,0 +1,167 @@
+CSS Foundations and Box Model
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Day 1</title>
+  </head>
+  <body>
+    <h1>CSS Foundations & Box Model</h1>
+    <p>This is a paragraph to demonstrate CSS styling and the box model.</p>
+    <h4>Main Concepts:</h4>
+    <ul>
+      <li>CSS Syntax and Selectors (id, class, element)</li>
+      <li>Box Model: Content, Padding, Border, Margin</li>
+      <li>Colors and Backgrounds</li>
+      <li>Text Styling</li>
+    </ul>
+    <link rel="stylesheet" href="example.css" />
+
+    <hr />
+
+    <h2>1. CSS Selectors (class, id, element)</h2>
+    <p>CSS selectors are used to select the HTML elements you want to style.</p>
+    <ul>
+      <li>Element selector → selects all elements of a type</li>
+      <li>Class selector (.) → used for multiple elements</li>
+      <li>ID selector (#) → used for one unique element</li>
+    </ul>
+    <style>
+      /* Element Selector */
+      p {
+        color: rgb(0, 0, 196);
+      }
+
+      h1{
+        color: rgb(255, 0, 0);
+        background-color: rgb(237, 237, 64);
+      }
+
+      /* Class Selector */
+      .highlight1 {
+        background: yellow;
+      }
+
+      /* ID Selector */
+      #title1 {
+        font-size: 24px;
+        color: rgb(0, 255, 26);
+      }
+    </style>
+    <h1 id="title1">Heading with ID Selector</h1>
+    <p>This paragraph is styled using element selector.</p>
+    <p class="highlight1">This paragraph uses a class selector.</p>
+
+    <hr />
+
+    <h1>Important Tags:</h1>
+    <ul>
+      <li>
+        &lt;div&gt; - Block-level container. It is used to group elements
+        together. Act like a box.
+      </li>
+      <li>
+        &lt;span&gt; - Inline container. Used to style small parts of text.
+        Unlike &lt;div&gt; tag, it does not start on a new line (inline
+        element).
+      </li>
+    </ul>
+
+    <hr />
+
+    <h2>2. Box Model (margin, padding, border)</h2>
+    <p>The CSS box model consists of: Content, Padding, Border, and Margin.</p>
+    <ul>
+      <li>
+        Content: The actual content of the box, where text and images appear.
+      </li>
+      <li>Padding → space inside border</li>
+      <li>Border → line around the element</li>
+      <li>Margin → space outside the border</li>
+    </ul>
+    <style>
+      .box2 {
+        width: 200px;
+        padding: 20px;
+        border: 2px solid rgb(255, 11, 11);
+        margin: 55px;
+        background-color: lightgray;
+      }
+    </style>
+    <div class="box2">This is a box model example.</div>
+
+    <hr />
+
+    <h2>3. Colors and Backgrounds</h2>
+    <p class="text-style4">CSS allows you to set colors and backgrounds for elements.</p>
+    <h3 style="color: rgb(4, 255, 4); background-color: yellow;">Ways to apply colors:</h3>
+    <ul>
+      <li>Color names → red</li>
+      <li>Hex → #ff0000</li>
+      <li>RGB → rgb(255,0,0)</li>
+    </ul>
+    <h3>Background properties:</h3>
+    <ul>
+      <li>background-color</li>
+      <li>background-image</li>
+      <li>background-size, etc.</li>
+    </ul>
+    <style>
+      .box3 {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+      }
+
+      .bg-image3 {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJcb_5OH1mWWtvcvDhymf5vM-6kAU3aC_Weg&s");
+        background-size: cover;
+        background-position: center;
+        height:700px;
+        color: white;
+      }
+    </style>
+    <div class="box3">Green Background with white text</div>
+    <br />
+    <div class="bg-image3">Background Image Example</div>
+
+    <hr />
+
+    <h2>4. Text Styling</h2>
+    <p>CSS provides various properties to style text.</p>
+    <ul>
+      <li>Color</li>
+      <li>font-family</li>
+      <li>font-size</li>
+      <li>font-weight</li>
+      <li>text-align</li>
+      <li>text-decoration</li>
+      <li>line-height</li>
+    </ul>
+    <style>
+      .text-style4 {
+        color: purple;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: underline;
+        line-height: 2.5;
+      }
+    </style>
+    <p class="text-style4" style="background-color: yellow">
+      This paragraph demonstrates various text styling properties in CSS.
+    </p>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

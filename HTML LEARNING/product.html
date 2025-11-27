@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Grid</title>
+    <style>
+        * {
+            margin: 0; /* Default margin remove */
+            padding: 0; /* Default padding remove */
+            box-sizing: border-box; /* Border aur padding width me include */
+        }
+
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            font-family: 'Arial', sans-serif; /* Font family */
+            padding: 40px 20px; /* Page pe padding */
+        }
+
+        /* Main heading */
+        .page-title {
+            text-align: center; /* Center me align */
+            font-size: 36px; /* Bada font */
+            color: #333; /* Dark color */
+            margin-bottom: 40px; /* Neeche space */
+        }
+
+        /* Products ka container - yahan flexbox use kar rahe hain */
+        .products-container {
+            display: flex; /* Flexbox enable - items ko arrange karne ke liye */
+            flex-wrap: wrap; /* Agar space na ho to next line me aa jaye */
+            gap: 25px; /* Cards ke beech uniform space */
+            max-width: 1200px; /* Container ki maximum width */
+            margin: 0 auto; /* Container ko center me lana */
+            justify-content: center; /* Cards ko center me align karna */
+        }
+
+        /* Har ek product card */
+        .product-card {
+            background-color: white; /* White background */
+            width: 280px; /* Fixed width */
+            border-radius: 12px; /* Rounded corners */
+            overflow: hidden; /* Bahar ki cheez hide ho jaye */
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            transition: 0.3s; /* Hover effect smooth */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        /* Product card pe hover karne par */
+        .product-card:hover {
+            transform: translateY(-8px); /* Card upar move hoga */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Shadow bada hoga */
+        }
+
+        /* Product image container */
+        .product-image {
+            width: 100%; /* Puri width */
+            height: 220px; /* Fixed height */
+            background-color: #e9ecef; /* Placeholder background */
+            display: flex; /* Flex use karke text center karna */
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+            font-size: 50px; /* Icon/emoji ka size */
+        }
+
+        /* Product details section */
+        .product-details {
+            padding: 20px; /* Andar se spacing */
+        }
+
+        /* Product name */
+        .product-name {
+            font-size: 20px; /* Font size */
+            color: #333; /* Dark color */
+            font-weight: bold; /* Bold text */
+            margin-bottom: 10px; /* Neeche space */
+        }
+
+        /* Product description */
+        .product-description {
+            color: #666; /* Gray color */
+            font-size: 14px; /* Small font */
+            line-height: 1.5; /* Line spacing */
+            margin-bottom: 15px; /* Neeche space */
+        }
+
+        /* Price aur button ka container - flex me arrange karna */
+        .product-footer {
+            display: flex; /* Flex layout */
+            justify-content: space-between; /* Dono ends pe spread karna */
+            align-items: center; /* Vertically center */
+        }
+
+        /* Price styling */
+        .product-price {
+            font-size: 24px; /* Bada font */
+            color: #27ae60; /* Green color */
+            font-weight: bold; /* Bold */
+        }
+
+        /* Buy button */
+        .buy-btn {
+            background-color: #3498db; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Border remove */
+            padding: 10px 20px; /* Padding */
+            border-radius: 6px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 14px; /* Font size */
+            transition: 0.3s; /* Smooth effect */
+        }
+
+        /* Buy button hover */
+        .buy-btn:hover {
+            background-color: #2980b9; /* Darker blue */
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Title -->
+    <h1 class="page-title">Featured Products</h1>
+
+    <!-- Products Container -->
+    <div class="products-container">
+        
+        <!-- Product Card 1 -->
+        <div class="product-card">
+            <div class="product-image">📱</div>
+            <div class="product-details">
+                <h3 class="product-name">Smartphone</h3>
+                <p class="product-description">
+                    Latest 5G smartphone with 128GB storage and amazing camera.
+                </p>
+                <div class="product-footer">
+                    <span class="product-price">₹15,999</span>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card">
+            <div class="product-image">💻</div>
+            <div class="product-details">
+                <h3 class="product-name">Laptop</h3>
+                <p class="product-description">
+                    Powerful laptop for students and professionals with 8GB RAM.
+                </p>
+                <div class="product-footer">
+                    <span class="product-price">₹45,999</span>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card">
+            <div class="product-image">🎧</div>
+            <div class="product-details">
+                <h3 class="product-name">Headphones</h3>
+                <p class="product-description">
+                    Wireless headphones with noise cancellation and 30hr battery.
+                </p>
+                <div class="product-footer">
+                    <span class="product-price">₹3,499</span>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="product-card">
+            <div class="product-image">⌚</div>
+            <div class="product-details">
+                <h3 class="product-name">Smart Watch</h3>
+                <p class="product-description">
+                    Track your fitness with heart rate monitor and GPS.
+                </p>
+                <div class="product-footer">
+                    <span class="product-price">₹8,999</span>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+

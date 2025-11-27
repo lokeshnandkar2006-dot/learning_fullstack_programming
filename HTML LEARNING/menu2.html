@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Food Station - Restaurant Menu</title>
+  
+  <style>
+    body {
+      background: #fff7f0;
+      font-family: 'Franklin Gothic Medium';
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #469429;
+      padding: 16px 38px;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .navbar .logo {
+      font-size: 1.7em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      color: #ff8c28;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar ul li {
+      margin-left: 26px;
+    }
+    .navbar ul li a {
+      color: #fafafa;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05em;
+      transition: color 0.3s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    .navbar ul li a:hover {
+      color: #ff8c28;
+      border-bottom: 2px solid #ff8c28;
+    }
+
+    
+
+    .menu-title {
+      text-align: center;
+      margin-top: 34px;
+      color: #e9d906;
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .food-category {
+      display: flex;
+      align-items: center;
+      margin: 24px 0 10px 16px;
+      font-size: 1.12em;
+      font-weight: 600;
+      color: #ff8c28;
+    }
+    .food-category img {
+      height: 34px;
+      width: 34px;
+      margin-right: 10px;
+      filter: drop-shadow(0 2px 3px #ffe7d6);
+    }
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center menu cards horizontally */
+      gap: 22px;
+      padding-bottom: 60px;
+    }
+    .menu-card {
+      background: #fefefe;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px #eedec7;
+      width: 295px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 16px;
+      transition: box-shadow 0.25s;
+    }
+    .menu-card:hover {
+      box-shadow: 0 6px 20px #ffdfa8;
+    }
+    .food-img {
+      width: 215px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 2px solid #ffdbb4;
+    }
+    .food-title {
+      font-size: 1.19em;
+      color: #2b22e3;
+      margin-bottom: 5px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .food-desc {
+      font-size: .99em;
+      color: #a2482c;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .food-price {
+      font-size: 1.09em;
+      color: #243769;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .order-btn {
+      background: #ff8c28;
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 8px 19px;
+      border-radius: 22px;
+      cursor: pointer;
+      font-size: 1.05em;
+      font-weight: 600;
+      transition: 0.21s;
+      box-shadow: 0 2px 6px #ffe8c6;
+    }
+    .order-btn:hover {
+      background: #243769;
+      color: #ff8c28;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Food Station</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#order">Order</a></li>
+    </ul>
+  </nav>
+
+  
+  
+  <h1 class="menu-title" id="menu">Food Station Menu</h1>
+
+  
+    
+  </div>
+  <div class="menu-container">
+    <div class="menu-card">
+      <img src="Untitled.png" alt="Classic Burger" class="food-img" />
+      <div class="food-title">Classic Burger</div>
+      <div class="food-desc">Classic Double Cheese Burger with extra spiciness
+        
+      </div>
+      <div class="food-price">$25</div>
+      <button class="order-btn">Place Order</button>
+    </div>
+    
+</body>
+</html>

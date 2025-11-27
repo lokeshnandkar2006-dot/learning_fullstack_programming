@@ -1,0 +1,358 @@
+<style>
+       
+        * {
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+
+        .navbar {
+            background-color: #903b98;  
+            padding: 15px 40px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+
+       
+        .logo {
+            font-size: 28px; 
+            font-weight: bold; 
+            color: #e6ebef; 
+            text-decoration: none; 
+        }
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      
+              .nav-menu {
+            display: flex; 
+           
+            gap: 30px; 
+        }
+
+
+      
+      .icon-wrapper {
+        position: relative; 
+        cursor: pointer; 
+        transition: 0.3s; 
+      }
+
+      
+      .icon-wrapper:hover {
+        transform: scale(1.1); 
+      }
+
+      
+      .icon {
+        font-size: 35px; 
+        color: #555; 
+      }
+
+     
+      .badge {
+        position: absolute; 
+        top: -8px;
+        right: -8px; 
+        background-color: #ff4757; 
+        color: white;
+        font-size: 12px; 
+        font-weight: bold; 
+        width: 22px; 
+        height: 22px; 
+        border-radius: 50%; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        border: 2px solid white; 
+        z-index: 1; 
+        animation: pulse 2s infinite; 
+      }
+
+      
+      @keyframes pulse {
+        0% {
+          transform: scale(1); 
+          box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+        }
+        50% {
+          transform: scale(1.1); 
+          box-shadow: 0 0 0 8px rgba(255, 71, 87, 0); 
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); 
+        }
+      }
+
+      
+      .sr-only {
+        position: absolute; 
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    
+      }
+
+
+
+      .hero-section {
+        width: 100%; /* Puri width le le */
+        height: 100vh; /* Viewport ki puri height - full screen */
+        background-image: url("https://img.freepik.com/premium-vector/ecommerce-online-shopping-marketing-concept-vector-stock-illustration_618588-583.jpg"); /* Background image */
+        background-size: cover; /* Image puri container ko cover kare */
+        background-position: center; /* Image center me ho */
+        position: relative; /* Ye parent hai absolute positioning ke liye */
+        overflow: hidden; /* Bahar ki content hide */
+      }
+
+      /* Dark overlay background image ke upar lagane ke liye */
+      .hero-overlay {
+        position: absolute; /* Parent ke relative to position hoga */
+        top: 0; /* Top se 0 distance */
+        left: 0; /* Left se 0 distance */
+        width: 100%; /* Puri width */
+        height: 100%; /* Puri height */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.6
+        ); /* Black color with 60% transparency - image ko thoda dark karega */
+        z-index: 1; /* Overlay image ke upar ho but content ke neeche */
+      }
+
+      /* Hero content container - text aur button */
+      .hero-content {
+        position: absolute; /* Overlay ke upar position karne ke liye */
+        top: 50%; /* Top se 50% neeche */
+        left:50%; /* Left se 50% right */
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Exact center me lana - khud ki width/height ka 50% wapas left aur up */
+        text-align: center; /* Text center me align */
+        color: white; /* Text color white */
+        z-index: 2; /* Content sabse upar dikhega */
+        width: 90%; /* Width 90% taaki sides pe space rahe */
+        max-width: 800px; /* Maximum width limit */
+      }
+
+      /* Main heading */
+      .hero-title {
+        font-size: 56px; /* Bahut bada font */
+        font-weight: bold; /* Bold text */
+        margin-bottom: 20px; /* Neeche space */
+        animation: fadeInDown 1s ease; /* Animation effect - 1 second me neeche se aayega */
+      }
+
+      /* Subtitle/description */
+      .hero-subtitle {
+        font-size: 20px; /* Medium font */
+        margin-bottom: 35px; /* Neeche space */
+        line-height: 1.6; /* Line spacing */
+        animation: fadeInUp 1s ease 0.3s backwards; /* Animation 0.3 second delay ke baad - upar se aayega */
+      }
+
+      /* CTA button */
+      .hero-btn {
+        background-color: #3ce76f; /* Red background */
+        color: white; /* White text */
+        padding: 18px 40px; /* Badi padding */
+        border: none; /* Border remove */
+        margin-top: 40px;
+        border-radius: 30px; /* Fully rounded */
+        font-size: 18px; /* Font size */
+        font-weight: bold; /* Bold text */
+        cursor: pointer; /* Pointer cursor */
+        transition: 0.3s; /* Smooth transitions */
+        animation: fadeInUp 1s ease 0.6s backwards; /* Animation 0.6s delay ke baad */
+      }
+
+      /* Button hover effect */
+      .hero-btn:hover {
+        background-color: #c0392b; /* Darker red */
+        transform: translateY(-3px) scale(1.05); /* Upar move + thoda bada */
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4); /* Red shadow */
+      }
+
+      /* Scroll indicator - neeche dikhane wala arrow */
+      .scroll-indicator {
+        position: absolute; /* Bottom pe position karna */
+        bottom: 80px; /* Bottom se 30px upar */
+        left: 50%; /* Center me */
+        transform: translateX(-50%); /* Exact center */
+        z-index: 2; /* Content ke level pe */
+        animation: bounce 2s infinite; /* Bounce animation continuously */
+      }
+
+      .scroll-indicator span {
+        color: white; /* Arrow color white */
+        font-size: 50px; /* Arrow bada */
+      }
+
+      /* Fade in from top animation */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0; /* Transparent se start */
+          transform: translateY(-200px); /* 30px upar se */
+        }
+        to {
+          opacity: 1; /* Fully visible */
+          transform: translateY(0); /* Normal position pe */
+        }
+      }
+
+      /* Fade in from bottom animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0; /* Transparent */
+          transform: translateY(150px); /* 30px neeche se */
+        }
+        to {
+          opacity: 1; /* Visible */
+          transform: translateY(0); /* Normal position */
+        }
+      }
+
+      /* Bounce animation for scroll indicator */
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0); /* Normal position */
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px); /* Upar jaye */
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px); /* Thoda upar */
+        }
+      }
+
+
+
+        
+
+        /* Main heading */
+        
+        .page-title {
+            text-align: center; /* Center me align */
+            font-size: 36px; /* Bada font */
+            color: #2108c6; /* Dark color */
+            margin-bottom: 40px; /* Neeche space */
+            margin-top: 80px;
+        }
+      body { background:linear-gradient(
+          135deg,
+          #aac2d4,
+          #5c7778
+        ); }
+            
+        /* Products ka container - yahan flexbox use kar rahe hain */
+        .products-container {
+            display: flex; /* Flexbox enable - items ko arrange karne ke liye */
+            flex-wrap: wrap; /* Agar space na ho to next line me aa jaye */
+            gap: 25px; /* Cards ke beech uniform space */
+            max-width: 1200px; /* Container ki maximum width */
+            margin: 0 auto; /* Container ko center me lana */
+            justify-content: center; /* Cards ko center me align karna */
+        }
+
+        /* Har ek product card */
+        .product-card {
+            background-color: white; /* White background */
+            width: 280px; /* Fixed width */
+            border-radius: 12px; /* Rounded corners */
+           
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            transition: 0.3s; /* Hover effect smooth */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        /* Product card pe hover karne par */
+        .product-card:hover {
+            transform: translateY(-8px); /* Card upar move hoga */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Shadow bada hoga */
+        }
+
+        /* Product image container */
+        .product-image {
+            width: 100%; /* Puri width */
+            height: 220px; /* Fixed height */
+            background-color: #e9ecef; /* Placeholder background */
+            display: flex; /* Flex use karke text center karna */
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+            font-size: 50px; /* Icon/emoji ka size */
+        }
+
+        /* Product details section */
+        .product-details {
+            padding: 20px; /* Andar se spacing */
+        }
+
+        /* Product name */
+        .product-name {
+            font-size: 20px; /* Font size */
+            color: #333; /* Dark color */
+            font-weight: bold; /* Bold text */
+            margin-bottom: 10px; /* Neeche space */
+        }
+
+        /* Product description */
+        .product-description {
+            color: #666; /* Gray color */
+            font-size: 14px; /* Small font */
+            line-height: 1.5; /* Line spacing */
+            margin-bottom: 15px; /* Neeche space */
+        }
+
+        /* Price aur button ka container - flex me arrange karna */
+        .product-footer {
+            display: flex; /* Flex layout */
+            justify-content: space-between; /* Dono ends pe spread karna */
+            align-items: center; /* Vertically center */
+        }
+
+        /* Price styling */
+        .product-price {
+            font-size: 24px; /* Bada font */
+            color: #27ae60; /* Green color */
+            font-weight: bold; /* Bold */
+        }
+
+        /* Buy button */
+        .buy-btn {
+            background-color: #3498db; /* Blue background */
+            color: white; /* White text */
+            border: none; /* Border remove */
+            padding: 10px 20px; /* Padding */
+            border-radius: 6px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 14px; /* Font size */
+            transition: 0.3s; /* Smooth effect */
+        }
+
+        /* Buy button hover */
+        .buy-btn:hover {
+            background-color: #2980b9; /* Darker blue */
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif; /* Font set karna */
+        }
+
+       
+    </style>

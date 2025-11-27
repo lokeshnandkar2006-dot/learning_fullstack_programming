@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Tables</title>
+  </head>
+  <body>
+    <h1>HTML Tables</h1>
+    <!--Simple Table-->
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>25</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Sarah</td>
+        <td>30</td>
+        <td>London</td>
+      </tr>
+      <tr>
+        <td>Mike</td>
+        <td>28</td>
+        <td>Paris</td>
+      </tr>
+    </table>
+    <hr />
+    
+    <h1>Table with Structure & ColSpan</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Laptop</td>
+          <td>$800</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Mouse</td>
+          <td>$20</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>Total</strong></td>
+          <td><strong>$1700</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+    <hr />
+
+    <!--Table with Colspan And Rowspan-->
+    <h1>Colspan and Rowspan</h1>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th colspan="2">Contact</th>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Email</td>
+        <td>Phone</td>
+      </tr>
+      <tr>
+        <td rowspan="2">Sarah</td>
+        <td>sarah@email.com</td>
+        <td>123-456</td>
+      </tr>
+      <tr>
+        <td>sarah2@email.com</td>
+        <td>789-012</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification Badge</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      
+      /* Notification icons container */
+      .notification-bar {
+        display: flex; /* Icons ko side by side lagana */
+        gap: 40px; /* Icons ke beech space */
+        background-color: white; /* White background */
+        padding: 25px 40px; /* Padding */
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Shadow */
+      }
+
+      /* Har ek icon ka container - badge lagane ke liye relative position chahiye */
+      .icon-wrapper {
+        position: relative; /* Ye parent hai badge absolute positioning ke liye */
+        cursor: pointer; /* Pointer cursor */
+        transition: 0.3s; /* Smooth transition */
+      }
+
+      /* Icon wrapper hover */
+      .icon-wrapper:hover {
+        transform: scale(1.1); /* Thoda bada ho jaye */
+      }
+
+      /* Icon styling */
+      .icon {
+        font-size: 35px; /* Icon size bada */
+        color: #555; /* Gray color */
+      }
+
+      /* Notification badge - icon ke upar right corner me */
+      .badge {
+        position: absolute; /* Parent
+            position: absolute; /* Parent (icon-wrapper) ke relative to position hoga */
+        top: -8px; /* Top se 8px upar - icon ke bahar */
+        right: -8px; /* Right se 8px bahar - icon ke bahar */
+        background-color: #ff4757; /* Red background */
+        color: white; /* White text */
+        font-size: 12px; /* Chota font */
+        font-weight: bold; /* Bold text */
+        width: 22px; /* Fixed width */
+        height: 22px; /* Fixed height - circle banane ke liye same as width */
+        border-radius: 50%; /* Perfect circle - 50% means full round */
+        display: flex; /* Badge ke andar number center karne ke liye */
+        justify-content: center; /* Horizontally center */
+        align-items: center; /* Vertically center */
+        border: 2px solid white; /* White border - background se separate dikhega */
+        z-index: 1; /* Badge icon ke upar dikhega */
+        animation: pulse 2s infinite; /* Pulse animation continuously */
+      }
+
+      /* Badge ke liye pulse animation - attention attract karne ke liye */
+      @keyframes pulse {
+        0% {
+          transform: scale(1); /* Normal size */
+          box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); /* Shadow start */
+        }
+        50% {
+          transform: scale(1.1); /* Thoda bada */
+          box-shadow: 0 0 0 8px rgba(255, 71, 87, 0); /* Shadow bahar fade */
+        }
+        100% {
+          transform: scale(1); /* Wapas normal */
+          box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); /* Shadow gone */
+        }
+      }
+
+      /* Badge text - for accessibility */
+      .sr-only {
+        position: absolute; /* Screen se bahar */
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Notification Bar -->
+    <div class="notification-bar">
+      <!-- Messages Icon with Badge -->
+      <div class="icon-wrapper">
+        <span class="icon">💬</span>
+        <span class="badge">5</span>
+        <span class="sr-only">5 unread messages</span>
+      </div>
+
+      <!-- Notifications Icon with Badge -->
+      <div class="icon-wrapper">
+        <span class="icon">🔔</span>
+        <span class="badge">12</span>
+        <span class="sr-only">12 notifications</span>
+      </div>
+
+      <!-- Cart Icon with Badge -->
+      <div class="icon-wrapper">
+        <span class="icon">🛒</span>
+        <span class="badge">3</span>
+        <span class="sr-only">3 items in cart</span>
+      </div>
+
+      <!-- Email Icon (no badge - koi notification nahi) -->
+      <div class="icon-wrapper">
+        <span class="icon">✉️</span>
+      </div>
+    </div>
+  </body>
+</html>

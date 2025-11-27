@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job Application Form</title>
+</head>
+<body>
+    <h1>Job Application Form</h1>
+    <form >
+        <fieldset>
+            <legend><h2>Personal Information</h2></legend>
+        <label for="first name">first Name:</label><br />
+        <input type="text" id="fname" name="fname" required /><br />
+        
+        <label for="middle name">middle Name:</label><br />
+        <input type="text" id="mname" name="mname" required /><br />
+
+        <label for="last name">Last Name:</label><br />
+        <input type="text" id="lname" name="lname" required /><br />
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Other Information</h2></legend>
+            <label for="dob">date of birth:</label><br />
+        <input type=" text " id="dob" name="dob" required /><br />
+          
+        <label for="Gender">gender:</label><br>
+
+        <label for="Male">Male</label>
+        <input type="radio" id="male" name="gender" value="male" />
+
+            <label for="Female">Female</label>
+        <input type="radio" id="Female" name="gender" value="female"/>
+
+        <label for="other">other</label>
+        <input type="radio" id="other" name="gender" value="other"/><br /><br>
+
+        <label for="Address">Address:</label>
+            <input type="text" name="Address" id="Address"required/><br /><br>
+
+            <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="">Select country</option>
+            <option value="india">India</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="china">china</option>
+            <option value="japan">japan</option>
+        </select> <br /><br>
+        
+        <label for="state">state:</label>
+        <select id="state" name="state" required>
+            <option value="">Select state</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Uttar pradesh">Uttar pradesh</option>
+            <option value="Madhya pradesh">Madhya pradesh</option>
+            <option value="kerala">Kerala</option>
+            <option value="delhi">Delhi</option>
+            <option value="punjab">punjab</option>
+            <option value="karnatka">karnatka</option>
+        </select> <br /><br>
+        </fieldset>
+
+
+        <fieldset>
+            <legend><h2>Contact details</h2></legend>
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required placeholder="E-mail" /><br /><br />
+
+        <label for="phone">Phone Number:</label><br />
+        <input type="phone" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="10-digit number" /><br /><br />
+        </fieldset>
+
+        <fieldset>
+            <legend><h2>Education Details</h2></legend>
+        <label for="school10">10th School Name:</label><br />
+        <input type="text" id="school10" name="school10"required /><br /><br />
+
+        <label for="college12">12th Collage name:</label><br />
+        <input type="text" id="college12" name="college12"required /><br /><br />
+        
+        <label for="Degree Collage">Degree Collage name:</label><br />
+        <input type="text" id="Degree Collage" name="Degree collage"required /><br /><br />
+        </fieldset>
+
+        <label for="skills">Skills (Select multiple with Ctrl/Cmd):</label>
+        <select id="skills" name="skills[]" multiple size="5">
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="other">Other</option>
+        </select><br /><br />
+
+        <label for="10th Marksheet">Upload 10th Marksheet (PDF):</label><br />
+        <input type="file" id="10th Marksheet" name="10th Marksheet" accept=".pdf" /><br /><br />
+
+        <label for="12th Marksheet">Upload 12th Marksheet (PDF):</label><br />
+        <input type="file" id="12th Marksheet" name="12th Marksheet" accept=".pdf" /><br /><br />
+
+        <label for="Degree Marksheet">upload Degree Marksheet (PDF):</label><br />
+        <input type="file" id="Degree Marksheet" name="Degree Marksheet" accept=".pdf" /><br /><br />
+
+
+        <label for="Photo">Upload photo (JPEG, PNG):</label><br />
+        <input type="file" id="photo" name="photo" accept="image/jpeg" /><br /><br />
+
+        <label for="">Experiance:</label><br />
+        <textarea id="Experiance" name="question" rows="4" cols="40" placeholder="Write your Experiance here..."></textarea><br /><br />
+
+        
+        <input type="button" value="Submit " />
+    </form>
+</body>
+</html>

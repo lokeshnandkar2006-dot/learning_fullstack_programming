@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: 'Times New Roman' sans-serif;
+            margin: 30px;
+            background: #dfee96;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #b3b3b3;
+        }
+
+        button {
+            background: #0D8CFB;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0162cb;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Student Registration Form</h3>
+    <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="Father Name">Father Name</label>
+        <input type="Father Name" id="Father Name" name="Father Name" placeholder="Enter Father Name" required>
+
+        <label for="Mother Name">Mother Name</label>
+        <input type="Mother Name" id="Mother Name" name="Mother Name" required>
+
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+            <option value="">Select country</option>
+            <option value="india">India</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="china">china</option>
+            <option value="japan">japan</option>
+        </select>
+
+        <label>Gender</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male" style="display:inline;">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required> <label for="female"
+            style="display:inline;">Female</label>
+        <input type="radio" id="other" name="gender" value="other" required> <label for="other"
+            style="display:inline;">Other</label>
+
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
