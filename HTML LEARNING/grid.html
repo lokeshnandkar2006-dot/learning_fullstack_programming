@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Grid</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 30px;
+      }
+
+      /* Dashboard ka main heading */
+      .dashboard-title {
+        font-size: 56px;
+        color: #ffffff;
+        margin-bottom: 30px;
+        font-weight: 900;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Dashboard grid container - yahan CSS Grid use kar rahe hain */
+      .dashboard-grid {
+        display: grid; /* Grid layout enable karna */
+        grid-template-columns: repeat(
+          3,
+          1fr
+        ); /* 3 columns banao, sabki equal width (1fr = 1 fraction) */
+        grid-template-rows: auto; /* Rows automatic height le lein content ke according */
+        gap: 20px; /* Grid items ke beech 20px space */
+        max-width: 1400px; /* Maximum width */
+        margin: 0 auto; /* Grid ko center me lana */
+      }
+
+      /* Stats card styling */
+      .stats-card {
+        background: linear-gradient(145deg, #ffffff, #edf0f3);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stats-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #120420);
+      }
+
+      /* Stats card hover effect */
+      .stats-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 62px 72px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Card icon */
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #ffffff;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      /* Card title */
+      .card-title {
+        color: #7f8c8d; /* Gray color */
+        font-size: 14px; /* Chota font */
+        text-transform: uppercase; /* Capital letters */
+        letter-spacing: 1px; /* Letters ke beech space */
+        margin-bottom: 10px; /* Neeche space */
+      }
+
+      /* Card value - main number */
+      .card-value {
+        font-size: 36px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 50%, #f7f6f7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 8px;
+      }
+
+      /* Card change indicator */
+      .card-change {
+        font-size: 14px; /* Small font */
+        color: #27ae60; /* Green color */
+      }
+
+      /* Large card - jo 2 columns span karega */
+      .large-card {
+        grid-column: span 2; /* Ye card 2 columns ki width lega - badi space */
+      }
+
+      /* Chart area placeholder */
+      .chart-area {
+        height: 210px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 20px;
+        margin-top: 20px;
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+        font-weight: 400;
+      }
+
+      /* Media Query - Mobile devices ke liye (768px se choti screen) */
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr; /* Sirf 1 column - cards ek ke neeche ek */
+          gap: 15px; /* Gap thoda kam */
+        }
+
+        .large-card {
+          grid-column: span 1; /* Large card bhi 1 column hi lega ab */
+        }
+
+        body {
+          padding: 35px; /* Page padding kam */
+        }
+
+        .dashboard-title {
+          font-size: 34px; /* Title ka size chota */
+        }
+      }
+
+      /* Tablet devices ke liye (769px se 1024px tak) */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .dashboard-grid {
+          grid-template-columns: repeat(
+            2,
+            1fr
+          ); /* 2 columns - medium screens ke liye */
+        }
+
+        .large-card {
+          grid-column: span 2; /* Large card dono columns lega */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dashboard Title -->
+    <h1 class="dashboard-title">Analytics Dashboard</h1>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      <!-- Stats Card 1 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-users"></i></div>
+        <div class="card-title">Total Users</div>
+        <div class="card-value">24,568</div>
+        <div class="card-change">↑ 12% from last month</div>
+      </div>
+
+      <!-- Stats Card 2 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-rupee-sign"></i></div>
+        <div class="card-title">Revenue</div>
+        <div class="card-value">₹4,89,250</div>
+        <div class="card-change">↑ 8% from last month</div>
+      </div>
+
+      <!-- Stats Card 3 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div class="card-title">Orders</div>
+        <div class="card-value">1,247</div>
+        <div class="card-change">↑ 15% from last month</div>
+      </div>
+
+      <!-- Large Card - spans 2 columns -->
+      <div class="stats-card large-card">
+        <div class="card-title">Sales Overview</div>
+        <div class="chart-area">
+          <i
+            class="fas fa-chart-line"
+            style="font-size: 48px; margin-right: 15px"
+          ></i>
+          Sales Analytics Chart
+        </div>
+      </div>
+
+      <!-- Stats Card 4 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-star"></i></div>
+        <div class="card-title">Reviews</div>
+        <div class="card-value">892</div>
+        <div class="card-change">↑ 23% from last month</div>
+      </div>
+
+      <!-- Stats Card 5 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+        <div class="card-title">Conversion Rate</div>
+        <div class="card-value">3.24%</div>
+        <div class="card-change">↑ 5% from last month</div>
+      </div>
+
+      <!-- Stats Card 6 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+        <div class="card-title">Active Sessions</div>
+        <div class="card-value">542</div>
+        <div class="card-change">↑ 18% from last hour</div>
+      </div>
+
+      <!-- Stats Card 7 -->
+      <div class="stats-card">
+        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="card-title">Mobile Users</div>
+        <div class="card-value">68%</div>
+        <div class="card-change">↑ 3% from last week</div>
+      </div>
+    </div>
+  </body>
+</html>

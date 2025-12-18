@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallery</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1a1a1a; /* Dark background */
+        padding: 40px 20px; /* Page padding */
+      }
+
+      /* Gallery heading */
+      .gallery-title {
+        text-align: center; /* Center align */
+        color: white; /* White text */
+        font-size: 42px; /* Bada font */
+        margin-bottom: 40px; /* Neeche space */
+      }
+
+      /* Gallery grid container */
+      .gallery-grid {
+        display: grid; /* Grid layout */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* Auto-fit: jitni columns fit ho sakti hain utni banao
+               minmax(300px, 1fr): minimum 300px width, maximum available space equally divide
+               Matlab: screen badi hai to 3-4 columns, choti hai to 1-2 columns automatically */
+        gap: 20px; /* Items ke beech gap */
+        max-width: 1400px; /* Maximum width */
+        margin: 0 auto; /* Center align */
+      }
+
+      /* Gallery item wrapper */
+      .gallery-item {
+        position: relative; /* Overlay ke liye relative position */
+        overflow: hidden; /* Bahar ki content hide */
+        border-radius: 12px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor */
+        aspect-ratio: 1; /* Square banane ke liye - height width ke equal */
+        background-color: #2c2c2c; /* Placeholder background */
+      }
+
+      /* Gallery image */
+      .gallery-img {
+        width: 100%; /* Puri width */
+        height: 100%; /* Puri height */
+        object-fit: cover; /* Image container ke according fit ho, crop ho sake */
+        transition: 0.5s; /* Smooth zoom effect */
+      }
+
+      /* Image hover - zoom in effect */
+      .gallery-item:hover .gallery-img {
+        transform: scale(1.15); /* Image 15% bada ho jaye */
+      }
+
+      /* Overlay - image pe hover karne par dikhai dega */
+      .gallery-overlay {
+        position: absolute; /* Gallery item ke relative to position */
+        top: 0; /* Top se 0 */
+        left: 0; /* Left se 0 */
+        width: 100%; /* Puri width */
+        height: 100%; /* Puri height */
+        background-color: rgba(0, 0, 0, 0.7); /* Black with 70% transparency */
+        display: flex; /* Flex for centering content */
+        flex-direction: column; /* Items vertically arrange */
+        justify-content: center; /* Vertically center */
+        align-items: center; /* Horizontally center */
+        opacity: 0; /* Initially invisible */
+        transition: 1s; /* Smooth fade in */
+      }
+
+      /* Overlay hover - visible ho jaye */
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1; /* Fully visible */
+      }
+
+      /* Overlay title */
+      .overlay-title {
+        color: white; /* White text */
+        font-size: 24px; /* Bada font */
+        font-weight: bold; /* Bold */
+        margin-bottom: 10px; /* Neeche space */
+        transform: translateY(60px); /* Initially neeche se */
+        transition: 0.3s 0.1s; /* Delay ke saath transition */
+      }
+
+      /* Title hover pe upar slide ho */
+      .gallery-item:hover .overlay-title {
+        transform: translateY(0); /* Normal position */
+      }
+
+      /* Overlay description */
+      .overlay-description {
+        color: #ddd; /* Light gray */
+        font-size: 14px; /* Chota font */
+        transform: translateY(20px); /* Initially neeche */
+        transition: 0.3s 0.2s; /* Thoda zyada delay */
+      }
+
+      /* Description hover pe upar slide */
+      .gallery-item:hover .overlay-description {
+        transform: translateY(0); /* Normal position */
+      }
+
+      /* Mobile devices ke liye - 600px se choti screen */
+      @media (max-width: 600px) {
+        .gallery-title {
+          font-size: 28px; /* Heading choti */
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr; /* Sirf 1 column - images stack hongi */
+          gap: 15px; /* Gap thoda kam */
+        }
+
+        body {
+          padding: 30px 20px; /* Padding kam */
+        }
+
+        .overlay-title {
+          font-size: 40px; /* Title chota */
+        }
+      }
+
+      /* Tablet - 601px se 900px */
+      @media (min-width: 601px) and (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        }
+      }
+
+      /* Large screens - 901px se upar */
+      @media (min-width: 901px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Gallery Title -->
+    <h1 class="gallery-title">Photography Gallery</h1>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      <!-- Gallery Item 1 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600"
+          alt="Mountain"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Mountain Peak</h3>
+          <p class="overlay-description">Nature Photography</p>
+        </div>
+      </div>
+
+      <!-- Gallery Item 2 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600"
+          alt="Stars"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Starry Night</h3>
+          <p class="overlay-description">Astrophotography</p>
+        </div>
+      </div>
+
+      <!-- Gallery Item 3 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600"
+          alt="Lake"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Peaceful Lake</h3>
+          <p class="overlay-description">Landscape</p>
+        </div>
+      </div>
+
+      <!-- Gallery Item 4 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600"
+          alt="Forest"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Dense Forest</h3>
+          <p class="overlay-description">Nature</p>
+        </div>
+      </div>
+
+      <!-- Gallery Item 5 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600"
+          alt="Sunset"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Golden Sunset</h3>
+          <p class="overlay-description">Evening Sky</p>
+        </div>
+      </div>
+
+      <!-- Gallery Item 6 -->
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600"
+          alt="Valley"
+          class="gallery-img"
+        />
+        <div class="gallery-overlay">
+          <h3 class="overlay-title">Green Valley</h3>
+          <p class="overlay-description">Landscape</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

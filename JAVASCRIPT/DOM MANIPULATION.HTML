@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 5</title>
+    <style>
+      /* Yeh classes ke liye CSS styles hain, taaki jab hum JavaScript se classes add/remove karenge to visual changes dikhein */
+      .active {
+        background-color: rgb(7, 235, 7); /* Active class ke saath light green background */
+        color: white; /* White text color */
+      }
+      .highlight {
+        border: 3px solid red; /* Highlight class ke saath red border */
+        padding: 5px; /* Thoda padding taaki border dikhe */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DOM Manipulation</h1>
+    <p>
+      DOM (Document Object Model) ek programming interface hai jo HTML documents
+      ko treat karta hai as a tree of objects. JavaScript ke through hum DOM ko
+      manipulate kar sakte hain aur webpage ko dynamic bana sakte hain.
+    </p>
+    <!-- Yahaan kuch HTML elements add kar rahe hain taaki JavaScript code work kare -->
+    <div id="main-header">Main Header</div>
+    <ul>
+      <li class="list-item">Item 1</li>
+      <li class="list-item">Item 2</li>
+      <li class="list-item">Item 3</li>
+    </ul>
+    <h2 id="myHeading">Original Heading</h2>
+    <div class="container1">Original Container</div>
+    <div class="container2">Original Container 2</div>
+    <div class="box1">Box Element 1</div>
+    <div class="box2">Box Element 2</div>
+    <br />
+    <div class="item1">Item Element 1</div>
+    <div class="item2">Item Element 2</div>
+    <br />
+    <div class="parent">
+      Parent Element
+      <div class="sibling">Sibling Element</div>
+      <p class="child">Child to remove</p>
+    </div>
+    <div class="remove-me">Element to Remove</div>
+    <div class="container3">Another Container</div>
+    <hr />
+
+    <h2>Selecting Elements</h2>
+    <script>
+      // By ID (getElementById) - ID se element ko select karne ka tareeka
+      let header = document.getElementById("main-header"); // "main-header" ID wale element ko header variable mein store karo
+      console.log(header); // Console mein header element ko print karo taaki dekho kya mila
+
+      // By Class Name (getElementsByClassName) - Class name se saare elements ko select karne ka tareeka
+      let items = document.getElementsByClassName("list-item"); // "list-item" class wale saare elements ko items mein store karo (HTMLCollection)
+      console.log(items); // Console mein items ko print karo
+
+      // By Tag Name (getElementsByTagName) - Tag name se saare elements ko select karne ka tareeka
+      let paragraphs = document.getElementsByTagName("p"); // Saare <p> tags ko paragraphs mein store karo
+      console.log(paragraphs); // Console mein paragraphs ko print karo
+
+      // Using Query Selector (returns first match) - CSS selector se pehla matching element ko select karne ka tareeka
+      let firstItem = document.querySelector(".list-item"); // Pehla ".list-item" class wala element ko firstItem mein store karo
+      console.log(firstItem); // Console mein firstItem ko print karo
+
+      // Using Query Selector All (returns all matches) - CSS selector se saare matching elements ko select karne ka tareeka
+      let allItems = document.querySelectorAll(".list-item"); // Saare ".list-item" class wale elements ko allItems mein store karo (NodeList)
+      console.log(allItems); // Console mein allItems ko print karo
+    </script>
+    <hr />
+
+    <h2>Modifying Elements</h2>
+    <script>
+      // Changing text content of an element - Element ka text content badalne ka tareeka
+      const heading = document.getElementById("myHeading"); // "myHeading" ID wale element ko heading mein store karo
+      heading.textContent = "New Heading"; // Heading ka text "New Heading" kar do
+
+      // HTML tags ko text ki tarah treat karega - HTML tags ko text maan kar treat karega, render nahi karega
+      heading.textContent = "<img>Bold</img>"; // Output: <strong>Bold</strong> (bold nahi hoga, text hi rahega)
+
+      // Changing HTML content - Element ka HTML content badalne ka tareeka
+      const container = document.querySelector(".container1"); // Pehla ".container1" class wala element ko container mein store karo
+      container.innerHTML =
+        "<h2>New Title</h2><p>New paragraph</p><p>New paragraph again</p>"; // Container ke andar naya HTML content daal do
+
+      // HTML properly render hoga, tags work karenge
+      const container1 = document.querySelector(".container2");
+      container1.innerHTML = "<strong>Bold Text</strong>"; // Output: Bold Text (bold ho jayega)
+    </script>
+    <hr />
+
+    <h2>Changing Styles</h2>
+    <script>
+      const box1 = document.querySelector(".box1"); // Pehla ".box1" class wala element ko box1 mein store karo
+
+      // Single property - Ek ek property ko change karne ka tareeka
+      box1.style.color = "orange"; // Box1 ka color red kar do (text red ho jayega)
+      box1.style.backgroundColor = "yellow"; // Box1 ka background yellow kar do
+      box1.style.fontSize = "50px"; // Box1 ka font size 20px kar do
+
+      // Multiple properties - Ek saath multiple properties change karne ka tareeka
+      const box2 = document.querySelector(".box2"); // Pehla ".box2" class wala element ko box2 mein store karo
+      box2.style.cssText = "color: blue; background: lightgreen; padding: 5px;"; // Box2 ke style ko pura change kar do (blue text, lightgray background, 10px padding)
+
+      // Manipulate classes - Classes ko manipulate karne ka tareeka (yeh visual changes ke liye CSS classes use karta hai)
+      const element = document.querySelector(".item1"); // Pehla ".item" class wala element ko element mein store karo
+
+      // Class add karna - Class add karne ka tareeka
+      element.classList.add("active"); // Element mein "active" class add kar do (ab lightgreen background aur white text dikhega)
+      console.log(
+        "Active class add ki gayi - ab element green background wala dikhega"
+      );
+
+      // Class remove karna - Class remove karne ka tareeka
+      element.classList.remove("active"); // Element se "active" class remove kar do (green background gayab ho jayega)
+      console.log("Active class remove ki gayi - ab normal dikhega");
+
+      // Class toggle karna (agar hai to remove, nahi hai to add) - Class toggle karne ka tareeka
+      const element2 = document.querySelector(".item2"); // Pehla ".item2" class wala element ko element2 mein store karo
+      element2.classList.toggle("highlight"); // Agar "highlight" class hai to remove, nahi hai to add kar do (red border add/remove hoga)
+      console.log(
+        "Highlight class toggle ki gayi - ab red border dikhega ya gayab hoga"
+      );
+
+      // Class toggle karna ek baar aur - Dubara toggle karne se remove ho jayega
+      element2.classList.toggle("highlight"); // Ab remove ho jayega
+      console.log(
+        "Highlight class dubara toggle ki gayi - ab border gayab ho gaya"
+      );
+
+      // Check karna class hai ya nahi - Check karne ka tareeka ki class hai ya nahi
+      if (element.classList.contains("active")) {
+        // Agar element mein "active" class hai
+        console.log("Element is active"); // Console mein "Element is active" print karo
+      } else {
+        // Warna
+        console.log("Element is not active"); // Console mein "Element is not active" print karo
+      }
+    </script>
+    <hr />
+
+    <h2>Creating Elements</h2>
+    <script>
+      // Step 1: Element create karo - Pehle naya element banao
+      const newDiv = document.createElement("div"); // Ek naya div element create karo aur newDiv mein store karo
+
+      // Step 2: Content add karo - Usme content daalo
+      newDiv.textContent = "I am a new div"; // NewDiv mein text "I am a new div" daal do
+
+      // Step 3: Attributes/Classes add karo - Attributes aur classes add karo
+      newDiv.className = "active"; // NewDiv ko "active" class de do
+      newDiv.id = "myBox"; // NewDiv ko "myBox" ID de do
+      newDiv.setAttribute("data-id", "123"); // NewDiv mein "data-id" attribute set karo value "123"
+
+      // Step 4: DOM mein add karo - Ab ise DOM mein add karo
+      document.body.appendChild(newDiv); // NewDiv ko body ke end mein add kar do
+    </script>
+    <hr />
+
+    <h3>Different Ways to Add Elements</h3>
+    <script>
+      const parent = document.querySelector(".parent"); // Pehla ".parent" class wala element ko parent mein store karo
+      const child = document.createElement("p"); // Ek naya p element create karo aur child mein store karo
+      child.textContent = "New Child"; // Child mein text daal do taaki dikhe
+
+      // // End mein add (last child ki tarah) - Parent ke end mein add karne ka tareeka
+      parent.appendChild(child); // Child ko parent ke end mein add kar do
+
+      // // Start mein add (first child ki tarah) - Parent ke start mein add karne ka tareeka
+      parent.prepend(child); // Child ko parent ke start mein add kar do
+
+      // // Kisi specific element ke pehle - Kisi specific element ke pehle add karne ka tareeka
+      parent.insertBefore(child, parent.firstChild); // Child ko parent ke first child ke pehle add kar do
+
+      // // Modern method: before, after - Modern tareeke se add karne ka
+      const sibling = document.querySelector(".sibling"); // Pehla ".sibling" class wala element ko sibling mein store karo
+      sibling.before(child); // Child ko sibling ke pehle add kar do
+      sibling.after(child); // Child ko sibling ke baad add kar do
+    </script>
+    <hr />
+
+    <h2>Removing Elements</h2>
+    <script>
+      // Method 1: Direct remove - Direct tareeke se element remove karne ka
+      const element1 = document.querySelector(".remove-me"); // Pehla ".remove-me" class wala element ko element1 mein store karo
+      element1.remove(); // Element1 ko DOM se remove kar do
+
+      // // // Method 2: Parent se remove - Parent ke through remove karne ka tareeka
+      const parent1 = document.querySelector(".parent"); // Pehla ".parent" class wala element ko parent1 mein store karo
+      const child1 = document.querySelector(".child"); // Pehla ".child" class wala element ko child1 mein store karo
+      parent1.removeChild(child1); // Parent1 se child1 ko remove kar do
+    </script>
+  </body>
+</html>

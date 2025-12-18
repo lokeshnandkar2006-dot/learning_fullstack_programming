@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce Shopping Cart System</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Helvetica Neue", Arial, sans-serif;
+        background: #f5f7fa;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        background: linear-gradient(135deg, #1a73e8 0%, #1e88e5 100%);
+        padding: 40px 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(26, 115, 232, 0.15);
+      }
+
+      .header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 8px;
+        color: white;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .header p {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 400;
+      }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 35px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid #e8eef5;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border-color: #1a73e8;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #f0f2f5;
+      }
+
+      .card-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1a73e8 0%, #1e88e5 100%);
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .card h2 {
+        color: #202124;
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .product-section,
+      .filter-section {
+        margin-bottom: 20px;
+      }
+
+      .product-section label,
+      .filter-section label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #202124;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        opacity: 0.7;
+      }
+
+      .product-section select,
+      .filter-section select {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        background: white;
+        color: #202124;
+        transition: all 0.2s;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 18px;
+        padding-right: 36px;
+      }
+
+      .product-section select:focus,
+      .filter-section select:focus {
+        outline: none;
+        border-color: #1a73e8;
+        box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+      }
+
+      .input-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .input-group input {
+        padding: 11px 12px;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+        color: #202124;
+        background: white;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: #1a73e8;
+        box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+      }
+
+      .checkbox-group {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #1a73e8;
+        border-radius: 4px;
+      }
+
+      .checkbox-item label {
+        margin: 0;
+        cursor: pointer;
+        font-weight: 500;
+        color: #202124;
+        font-size: 0.9rem;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      button {
+        flex: 1;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #1a73e8 0%, #1e88e5 100%);
+        color: white;
+        box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(26, 115, 232, 0.4);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #202124;
+        border: 1px solid #dadce0;
+      }
+
+      .btn-secondary:hover {
+        background: #f0f0f0;
+        border-color: #bdc1c6;
+      }
+
+      .output-section {
+        background: white;
+        border-radius: 12px;
+        padding: 28px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e8eef5;
+      }
+
+      .output-section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #f0f2f5;
+      }
+
+      .output-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1a73e8 0%, #1e88e5 100%);
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        font-size: 1.3rem;
+      }
+
+      .output-section h2 {
+        color: #202124;
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .result-item {
+        background: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .result-label {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .result-value {
+        font-weight: 700;
+        color: #667eea;
+        font-size: 1.1rem;
+      }
+
+      .total-section {
+        background: linear-gradient(135deg, #1a73e8 0%, #1e88e5 100%);
+        color: white;
+        padding: 28px;
+        border-radius: 12px;
+        margin-top: 24px;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(26, 115, 232, 0.2);
+      }
+
+      .total-section .label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+
+      .total-section .amount {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-top: 12px;
+        letter-spacing: -1px;
+      }
+
+      .message-box {
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+      }
+
+      .message-success {
+        background: #e6f4ea;
+        color: #137333;
+        border-left: 4px solid #34a853;
+      }
+
+      .message-error {
+        background: #fce8e6;
+        color: #c5221f;
+        border-left: 4px solid #ea4335;
+      }
+
+      .message-warning {
+        background: #fef7e0;
+        color: #9c6c00;
+        border-left: 4px solid #fbbc04;
+      }
+
+      .message-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .detail-box {
+        background: #f8f9fa;
+        padding: 18px;
+        border-radius: 10px;
+        margin: 18px 0;
+        border-left: 4px solid #1a73e8;
+      }
+
+      .detail-box-title {
+        font-weight: 600;
+        color: #1a73e8;
+        margin-bottom: 14px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .detail-item {
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.92rem;
+        color: #202124;
+        border-bottom: 1px solid #e8eef5;
+      }
+
+      .detail-item:last-child {
+        border-bottom: none;
+      }
+
+      .info-box {
+        padding: 16px;
+        background: #e8f0fe;
+        border-radius: 10px;
+        border-left: 4px solid #1a73e8;
+        margin-top: 18px;
+        font-size: 0.9rem;
+        color: #1a73e8;
+      }
+
+      .info-box-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .coupon-list {
+        list-style: none;
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+
+      .coupon-list li {
+        padding: 6px 0;
+        color: #202124;
+      }
+
+      .coupon-list strong {
+        color: #1a73e8;
+      }
+
+      @media (max-width: 768px) {
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .input-row {
+          grid-template-columns: 1fr;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        .total-section .amount {
+          font-size: 2.2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Shopping Bill Calculator</h1>
+        <p>Learn: IF-ELSE, Loops, Discounts, and Smart Calculations</p>
+      </div>
+
+      <div class="main-content">
+        <!-- LEFT CARD: Product Selection -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">📦</div>
+            <h2>Select Product</h2>
+          </div>
+
+          <div class="product-section">
+            <label for="product">Choose Product</label>
+            <select id="product">
+              <option value="">-- Select --</option>
+              <option value="book">Book - ₹800</option>
+              <option value="pen">Pen Box - ₹150</option>
+              <option value="notebook">Notebook - ₹70</option>
+              <option value="pencil">Pencil box - ₹100</option>
+              <option value="compass">Compass - ₹100</option>
+
+            </select>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="quantity">How Many?</label>
+              <input type="number" id="quantity" value="1" min="1"  />
+            </div>
+            <div class="input-group">
+              <label for="age">Your Age</label>
+              <input type="number" id="age" value="" min="1" max="100" />
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <label for="delivery">Delivery</label>
+            <select id="delivery">
+              <option value="normal">Normal - ₹50</option>
+              <option value="fast">Fast - ₹150</option>
+            </select>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="gift" name="gift" />
+              <label for="gift">Gift Wrap (+₹30)</label>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn-primary" onclick="calculateOrder()">
+              Calculate
+            </button>
+            <button class="btn-secondary" onclick="resetForm()">Clear</button>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD: Coupon & Info -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🎟️</div>
+            <h2>Special Codes</h2>
+          </div>
+
+          <div class="filter-section">
+            <label for="coupon">Enter Code</label>
+            <select id="coupon">
+              <option value="">No Code</option>
+              <option value="SAVE10">SAVE10 - 10% off</option>
+              <option value="STUDENT">STUDENT - 15% (if age < 25)</option>
+              <option value="BULK">BULK - 20% (if qty > 2)</option>
+            </select>
+          </div>
+
+          <div class="checkbox-group" style="flex-direction: column; gap: 12px">
+            <div class="checkbox-item">
+              <input type="checkbox" id="member" name="member" />
+              <label for="member">I am a Member (+5% extra off)</label>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-box-title">Available Codes</div>
+            <ul class="coupon-list">
+              <li>✓ <strong>SAVE10:</strong> 10% discount</li>
+              <li>✓ <strong>STUDENT:</strong> 15% (age < 25)</li>
+              <li>✓ <strong>BULK:</strong> 20% (quantity > 2)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTPUT SECTION -->
+      <div class="output-section">
+        <div class="output-section-header">
+          <div class="output-icon">📊</div>
+          <h2>Order Summary</h2>
+        </div>
+        <div id="output">
+          <div
+            style="
+              text-align: center;
+              color: #999;
+              padding: 60px 40px;
+              font-size: 0.95rem;
+            "
+          >
+            Click "Calculate Total" to see your order summary here...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ============================================
+      // STEP 1: Create a product list (Object)
+      // ============================================
+      const products = {
+        book: { name: "Book", price: 800 },
+        pen: { name: "Pen Box", price: 150 },
+        notebook: { name: "Notebook", price: 70 },
+        pencil: {name: "Pencil box", price: 100},
+        compass: {name:"Compass", price: 100}
+        
+      };
+
+      // STEP 2: Delivery prices (Object)
+      const deliveryPrices = {
+        normal: 50,
+        fast: 150,
+      };
+
+      // ============================================
+      // MAIN FUNCTION - Calculate Order
+      // ============================================
+      function calculateOrder() {
+        // Get values from form
+        const productId = document.getElementById("product").value;
+        const quantity = Number(document.getElementById("quantity").value);
+        const age = Number(document.getElementById("age").value);
+        const delivery = document.getElementById("delivery").value;
+        const coupon = document.getElementById("coupon").value;
+        const hasGift = document.getElementById("gift").checked;
+        const isMember = document.getElementById("member").checked;
+
+        let errorMsg = "";
+
+        // ============================================
+        // CHECK 1: IF-ELSE - Is product selected?
+        // ============================================
+        if (!productId) {
+          errorMsg = "Please select a product!";
+        }
+        // ============================================
+        // CHECK 2: ELSE-IF - Is quantity valid?
+        // ============================================
+        else if (quantity <= 0) {
+          errorMsg = "Quantity must be at least 1!";
+        } 
+        // ============================================
+        // CHECK 3: ELSE-IF - Is age valid?
+        // ============================================
+        else if (age < 1 || age > 100) {
+          errorMsg = "Please enter valid age!";
+        } else {
+          // All checks passed - Calculate order
+
+          // ============================================
+          // STEP 3: FOR-IN LOOP - Find product details
+          // FOR-IN loops through object properties
+          // ============================================
+          let selectedProduct = null;
+          for (let key in products) {
+            if (key === productId) {
+              selectedProduct = products[key];
+              break; // BREAK - Stop loop once found
+            }
+          }
+
+          // Get price and calculate subtotal
+          const price = selectedProduct.price;
+          const subtotal = price * quantity;
+
+          // ============================================
+          // STEP 4: SWITCH - Get delivery charge
+          // ============================================
+          let deliveryCharge = 0;
+          switch (delivery) {
+            case "normal":
+              deliveryCharge = deliveryPrices.normal;
+              break;
+            case "fast":
+              deliveryCharge = deliveryPrices.fast;
+              break;
+            default:
+              deliveryCharge = 0;
+          }
+
+          // ============================================
+          // STEP 5: Calculate discounts
+          // ============================================
+          let discount = 0;
+          let discountMsg = "No discount";
+
+          // ============================================
+          // NESTED IF - Check coupon eligibility
+          // ============================================
+          if (coupon && coupon !== "") {
+            if (coupon === "SAVE10") {
+              // Simple 10% discount for everyone
+              discount = (subtotal * 10) / 100;
+              discountMsg = "SAVE10: 10% off";
+            }
+            // NESTED IF with LOGICAL OPERATOR (&&)
+            else if (coupon === "STUDENT" && age < 25) {
+              // 15% discount only if age < 25
+              discount = (subtotal * 15) / 100;
+              discountMsg = "STUDENT: 15% off (Age verified)";
+            } else if (coupon === "STUDENT" && age >= 25) {
+              // Not eligible
+              discountMsg = "STUDENT: Not eligible (Age must be < 25)";
+              discount = 0;
+            }
+            // NESTED IF with LOGICAL OPERATOR (&&)
+            else if (coupon === "BULK" && quantity > 2) {
+              // 20% discount if buying more than 2 items
+              discount = (subtotal * 20) / 100;
+              discountMsg = "BULK: 20% off (Qty > 2)";
+            } else if (coupon === "BULK" && quantity <= 2) {
+              // Not eligible
+              discountMsg = "BULK: Not eligible (Need qty > 2)";
+              discount = 0;
+            }
+          }
+
+          // ============================================
+          // Member discount (IF statement)
+          // ============================================
+          let memberDiscount = 0;
+          if (isMember) {
+            memberDiscount = (subtotal * 5) / 100;
+          }
+
+          // ============================================
+          // Gift wrap charge (IF statement)
+          // ============================================
+          let giftCharge = 0;
+          if (hasGift) {
+            giftCharge = 30;
+          }
+
+          // ============================================
+          // Calculate FINAL TOTAL
+          // ============================================
+          const totalDiscount = discount + memberDiscount;
+          const finalTotal =
+            subtotal + deliveryCharge + giftCharge - totalDiscount;
+
+          // ============================================
+          // FOR LOOP - Show each item
+          // ============================================
+          let itemsList = "";
+          for (let i = 1; i <= quantity; i++) {
+            itemsList += `<div class="detail-item">
+              <span>Item ${i}</span>
+              <span>₹${price}</span>
+            </div>`;
+          }
+
+          // ============================================
+          // TERNARY OPERATOR - Check if total is valid
+          // ============================================
+          const message =
+            finalTotal >= 0
+              ? `<div class="message-box message-success"><span class="message-icon">✓</span> Order Ready!</div>`
+              : `<div class="message-box message-error"><span class="message-icon">✗</span> Error</div>`;
+
+          // ============================================
+          // Display results
+          // ============================================
+          document.getElementById("output").innerHTML = `
+            ${message}
+
+            <!-- Product Info -->
+            <div class="detail-box">
+              <div class="detail-box-title">Your Order</div>
+              <div class="detail-item">
+                <span>Product</span>
+                <span style="color: #1a73e8; font-weight: 600;">${
+                  selectedProduct.name
+                }</span>
+              </div>
+              <div class="detail-item">
+                <span>Price per item</span>
+                <span>₹${price}</span>
+              </div>
+              <div class="detail-item">
+                <span>Quantity</span>
+                <span>${quantity}</span>
+              </div>
+              <div class="detail-item" style="border-top: 2px solid #1a73e8; margin-top: 8px; padding-top: 8px; font-weight: 600;">
+                <span>Subtotal</span>
+                <span style="color: #1a73e8;">₹${subtotal}</span>
+              </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="detail-box">
+              <div class="detail-box-title">Item Details</div>
+              ${itemsList}
+            </div>
+
+            <!-- Charges & Discounts -->
+            <div class="detail-box">
+              <div class="detail-box-title">Charges & Discounts</div>
+              
+              <div class="detail-item">
+                <span>Delivery (${delivery})</span>
+                <span style="color: #ea4335;">+₹${deliveryCharge}</span>
+              </div>
+
+              ${
+                hasGift
+                  ? `<div class="detail-item">
+                <span>Gift Wrap</span>
+                <span style="color: #ea4335;">+₹${giftCharge}</span>
+              </div>`
+                  : ""
+              }
+
+              ${
+                discount > 0
+                  ? `<div class="detail-item">
+                <span>${discountMsg}</span>
+                <span style="color: #34a853;">-₹${Math.round(discount)}</span>
+              </div>`
+                  : `<div class="detail-item">
+                <span style="color: #999;">${discountMsg}</span>
+              </div>`
+              }
+
+              ${
+                memberDiscount > 0
+                  ? `<div class="detail-item">
+                <span>Member Discount</span>
+                <span style="color: #34a853;">-₹${Math.round(
+                  memberDiscount
+                )}</span>
+              </div>`
+                  : ""
+              }
+            </div>
+
+            <!-- Final Total -->
+            <div class="total-section">
+              <div class="label">TOTAL AMOUNT</div>
+              <div class="amount">₹${Math.round(finalTotal)}</div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="info-box">
+              <div class="info-box-title">Order Summary</div>
+              <div style="font-size: 0.85rem; line-height: 1.7; color: #1a73e8;">
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                  <span>Your Age:</span>
+                  <strong>${age}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                  <span>Member:</span>
+                  <strong>${isMember ? "Yes" : "No"}</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 6px 0;">
+                  <span>Total Discount:</span>
+                  <strong>₹${Math.round(totalDiscount)}</strong>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        // ============================================
+        // Show error if validation failed
+        // ============================================
+        if (errorMsg) {
+          document.getElementById("output").innerHTML = `
+            <div class="message-box message-error">
+              <span class="message-icon">⚠</span>
+              ${errorMsg}
+            </div>
+          `;
+        }
+      }
+
+      // ============================================
+      // Reset form - Clear all fields
+      // ============================================
+      function resetForm() {
+        document.getElementById("product").value = "";
+        document.getElementById("quantity").value = "1";
+        document.getElementById("age").value = "";
+        document.getElementById("delivery").value = "normal";
+        document.getElementById("coupon").value = "";
+        document.getElementById("gift").checked = false;
+        document.getElementById("member").checked = false;
+
+        document.getElementById("output").innerHTML = `
+          <div style="text-align: center; color: #999; padding: 60px 40px; font-size: 0.95rem;">
+            Click "Calculate" to see your order here...
+          </div>
+        `;
+      }
+    </script>
+  </body>
+</html>

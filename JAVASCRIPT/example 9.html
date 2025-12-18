@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>Dynamic Product Card</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+        font-size: 36px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .product-name {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .product-price {
+        font-size: 24px;
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .product-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .quantity-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .quantity-label {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .quantity-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .qty-btn {
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: #667eea;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .qty-btn:hover {
+        background: #5568d3;
+      }
+
+      .quantity-value {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .add-to-cart {
+        background: #667eea;
+        color: white;
+      }
+
+      .add-to-cart:hover {
+        background: #5568d3;
+      }
+
+      .remove-btn {
+        background: #ff4757;
+        color: white;
+      }
+
+      .remove-btn:hover {
+        background: #ee5a6f;
+      }
+
+      .cart-section {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .cart-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-items {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .cart-item {
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-total {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 2px solid #e0e0e0;
+        font-size: 20px;
+        font-weight: bold;
+        color: #667eea;
+        text-align: right;
+      }
+
+      .empty-cart {
+        text-align: center;
+        color: #999;
+        padding: 30px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="fas fa-store"></i> Dynamic Product Store</h1>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- Products will be added here dynamically -->
+      </div>
+
+      <div class="cart-section">
+        <div class="cart-title">
+          <span><i class="fas fa-shopping-bag"></i> Shopping Cart</span>
+          <span id="cartCount">0 items</span>
+        </div>
+        <div id="cartItems" class="cart-items">
+          <div class="empty-cart">Your cart is empty</div>
+        </div>
+        <div class="cart-total" id="cartTotal">Total: ₹0</div>
+      </div>
+    </div>
+
+    <script>
+      // Product data
+      const products = [
+        {
+          id: 1,
+          name: "Laptop",
+          price: 45000,
+          icon: "fas fa-laptop",
+          description: "High-performance laptop",
+        },
+        {
+          id: 2,
+          name: "Smartphone",
+          price: 25000,
+          icon: "fas fa-mobile-alt",
+          description: "Latest smartphone model",
+        },
+        {
+          id: 3,
+          name: "Headphones",
+          price: 3000,
+          icon: "fas fa-headphones",
+          description: "Wireless headphones",
+        },
+        {
+          id: 4,
+          name: "Smartwatch",
+          price: 8000,
+          icon: "fas fa-clock",
+          description: "Fitness tracking watch",
+        },
+      ];
+
+      // Elements select karna
+      const productsGrid = document.getElementById("productsGrid");
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+
+      // Cart array
+      let cart = [];
+
+      // Function: Product cards create karna (Creating Elements)
+      function createProductCard(product) {
+        // Main card div
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        // Card ka HTML structure (Using innerHTML)
+        card.innerHTML = `
+                <div class="product-image"><i class="${product.icon}"></i></div>
+                <div class="product-info">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">₹${product.price}</div>
+                    <div class="product-description">${product.description}</div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="decreaseQty(${product.id})">-</button>
+                            <span class="quantity-value" id="qty-${product.id}">1</span>
+                            <button class="qty-btn" onclick="increaseQty(${product.id})">+</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn add-to-cart" onclick="addToCart(${product.id})">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+
+        return card;
+      }
+
+      // Function: Quantity increase (Changing text content)
+      function increaseQty(productId) {
+        const qtyElement = document.getElementById(`qty-${productId}`);
+        let currentQty = parseInt(qtyElement.textContent);
+        qtyElement.textContent = currentQty + 1;
+      }
+
+      // Function: Quantity decrease
+      function decreaseQty(productId) {
+        const qtyElement = document.getElementById(`qty-${productId}`);
+        let currentQty = parseInt(qtyElement.textContent);
+        if (currentQty > 1) {
+          qtyElement.textContent = currentQty - 1;
+        }
+      }
+
+      // Function: Cart mein add karna
+      function addToCart(productId) {
+        const product = products.find((p) => p.id === productId);
+        const qtyElement = document.getElementById(`qty-${productId}`);
+        const quantity = parseInt(qtyElement.textContent);
+
+        // Check if product already in cart
+        const existingItem = cart.find((item) => item.id === productId);
+
+        if (existingItem) {
+          existingItem.quantity += quantity;
+        } else {
+          cart.push({
+            ...product,
+            quantity: quantity,
+          });
+        }
+
+        updateCart(); // Cart update karna
+        qtyElement.textContent = "1"; // Quantity reset karna
+      }
+
+      // Function: Cart se remove karna (Removing elements)
+      function removeFromCart(productId) {
+        cart = cart.filter((item) => item.id !== productId);
+        updateCart();
+      }
+
+      // Function: Cart UI update karna
+      function updateCart() {
+        // Empty cart check
+        if (cart.length === 0) {
+          cartItems.innerHTML =
+            '<div class="empty-cart">Your cart is empty</div>';
+          cartCount.textContent = "0 items";
+          cartTotal.textContent = "Total: ₹0";
+          return;
+        }
+
+        // Cart items HTML banana
+        let cartHTML = "";
+        let total = 0;
+        let totalItems = 0;
+
+        cart.forEach((item) => {
+          const itemTotal = item.price * item.quantity;
+          total += itemTotal;
+          totalItems += item.quantity;
+
+          cartHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong><i class="${item.icon}"></i> ${item.name}</strong>
+                            <div style="color: #666; font-size: 14px;">
+                                ₹${item.price} × ${item.quantity} = ₹${itemTotal}
+                            </div>
+                        </div>
+                        <button class="btn remove-btn" onclick="removeFromCart(${item.id})" style="flex: none; padding: 8px 15px;">
+                            Remove
+                        </button>
+                    </div>
+                `;
+        });
+
+        // DOM update karna (Changing innerHTML)
+        cartItems.innerHTML = cartHTML;
+        cartCount.textContent = `${totalItems} item${
+          totalItems > 1 ? "s" : ""
+        }`;
+        cartTotal.textContent = `Total: ₹${total}`;
+      }
+
+      // Initialize: Products display karna
+      function initProducts() {
+        products.forEach((product) => {
+          const card = createProductCard(product);
+          productsGrid.appendChild(card); // Adding to DOM
+        });
+      }
+
+      // Page load hone par products show karna
+      initProducts();
+    </script>
+  </body>
+</html>

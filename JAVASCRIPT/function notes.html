@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 3</title>
+  </head>
+  <body>
+    <h1>Functions, Function Types & Scope</h1>
+    <hr />
+
+    <h2>FUNCTIONS</h2>
+    <p>
+      A function is a block of code designed to perform a particular task. It is
+      executed when "something" invokes it (calls it).
+    </p>
+    <p>
+      Think of a function like: “Ek employee jo ek kaam karta hai jab tum use
+      bulaate ho.”
+    </p>
+    <hr />
+
+    <h2>FUNCTION TYPES</h2>
+    <h3>1. Function Declaration</h3>
+    <script>
+      function greet() {
+        console.log("Hello, welcome back!");
+      }
+      greet();
+    </script>
+    <ul>
+      <li>function greet() → function define kiya</li>
+      <li>{} → iske andar likha code jab function call hoga tab chalega</li>
+      <li>greet() → function ko call kiya</li>
+    </ul>
+    <hr />
+
+    <h3>2. Function Expression</h3>
+    <script>
+      const sayHello = function () {
+        console.log("Hello there!");
+      };
+      sayHello();
+    </script>
+    <ul>
+      <li>const sayHello = → function ko variable me store kiya</li>
+      <li>function () → function define kiya (iska koi naam nahi hai)</li>
+      <li>{} → iske andar likha code jab function call hoga tab chalega</li>
+      <li>sayHello() → function ko call kiya</li>
+    </ul>
+    <hr />
+
+    <h3>3. Parameters & Arguments</h3>
+    <script>
+      function add(a, b) {
+        console.log("Sum is: " + (a + b));
+      }
+      add(5, 10);
+    </script>
+    <ul>
+      <li>a, b → parameters (placeholders)</li>
+      <li>5, 10 → arguments (actual values)</li>
+      <li>{} → iske andar likha code jab function call hoga tab chalega</li>
+      <li>add(5, 10) → function ko call kiya</li>
+    </ul>
+    <hr />
+
+    <h3>4. Return Statement</h3>
+    <script>
+      function multiply(x, y) {
+        return x * y;
+      }
+      const result = multiply(4, 6);
+      console.log("Product is: " + result);
+    </script>
+    <ul>
+      <li>x, y → parameters (placeholders)</li>
+      <li>4, 6 → arguments (actual values)</li>
+      <li>{ return x * y; } → function ka result wapas karta hai</li>
+      <li>
+        const result = → function ke return value ko variable me store kiya
+      </li>
+      <li>multiply(4, 6) → function ko call kiya</li>
+    </ul>
+    <hr />
+
+    <h3>5. Arrow Functions (Modern JS)</h3>
+    <script>
+      const divide = (m, n) => {
+        return m / n;
+      };
+      const divisionResult = divide(20, 4);
+      console.log("Division Result is: " + divisionResult);
+    </script>
+    <ul>
+      <li>const divide = → function ko variable me store kiya</li>
+      <li>(m, n) → parameters (placeholders)</li>
+      <li>{ return m / n; } → function ka result wapas karta hai</li>
+      <li>
+        const divisionResult = → function ke return value ko variable me store
+        kiya
+      </li>
+      <li>divide(20, 4) → function ko call kiya</li>
+    </ul>
+    <hr />
+
+    <h3>6. Function Hoisting</h3>
+    <p>
+      Tum function ko uske define hone se pehle bhi call kar sakte ho — if it is
+      a function declaration.
+    </p>
+    <script>
+      hoistedFunction();
+      function hoistedFunction() {
+        console.log("This function is hoisted!");
+      }
+    </script>
+    <ul>
+      <li>hoistedFunction() → function ko call kiya (define hone se pehle)</li>
+      <li>function hoistedFunction() → function define kiya</li>
+      <li>{} → iske andar likha code jab function call hoga tab chalega</li>
+    </ul>
+    <hr />
+
+    <h3>8. Default Parameters</h3>
+    <script>
+      function greetUser(name = "Guest") {
+        console.log("Hello, " + name + "!");
+      }
+      greetUser(); // Uses default parameter
+      greetUser("Alice"); // Overrides default parameter
+    </script>
+    <ul>
+      <li>name = "Guest" → default parameter value set kiya</li>
+      <li>{} → iske andar likha code jab function call hoga tab chalega</li>
+      <li>greetUser() → function ko call kiya (default value use ki)</li>
+      <li>greetUser("Alice") → function ko call kiya (custom value use ki)</li>
+    </ul>
+    <hr />
+
+    <h2>9. SCOPE (Global vs Local)</h2>
+    <p>
+      Scope determines the accessibility (visibility) of variables. JavaScript
+      has two types of scope: Global Scope and Local Scope.
+    </p>
+    <h3>i. Global Scope</h3>
+    <script>
+      let globalVar = "I am a global variable";
+
+      function showGlobalVar() {
+        console.log(globalVar);
+      }
+      showGlobalVar();
+      console.log(globalVar); // This will work fine
+    </script>
+    <ul>
+      <li>globalVar → globally accessible variable</li>
+      <li>showGlobalVar() → function jo global variable ko access karta hai</li>
+    </ul>
+    <hr />
+
+    <h3>ii. Local Scope</h3>
+    <script>
+      function showLocalVar() {
+        let localVar = "I am a local variable";
+        console.log(localVar);
+      }
+      showLocalVar();
+      console.log(localVar); // This will cause an error
+    </script>
+    <ul>
+      <li>localVar → sirf function ke andar accessible variable</li>
+      <li>showLocalVar() → function jo local variable ko access karta hai</li>
+    </ul>
+    <hr />
+
+    <h3>10. Block Scope (let & const)</h3>
+    <script>
+      if (true) {
+        let blockVar = "I am a block-scoped variable";
+        console.log(blockVar); // This will work fine
+      }
+      console.log(blockVar); // This will cause an error
+    </script>
+    <ul>
+      <li>blockVar → sirf block ke andar accessible variable</li>
+      <li>{ } → block jisme variable define kiya gaya hai</li>
+    </ul>
+    <hr />
+  </body>
+</html>

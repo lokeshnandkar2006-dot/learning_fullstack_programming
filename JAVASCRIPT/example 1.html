@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 1</title>
+  </head>
+  <body>
+    <h1>1. JavaScript Basics for Web Development</h1>
+    <p>
+      JavaScript is a language which is used to make the websites interactive
+      and working with the user. It is a core technology of the World Wide Web,
+      alongside HTML and CSS. JavaScript enables dynamic content, control
+      multimedia, animate images, and much more.
+    </p>
+    <ul>
+      <li>HTML → Car ka body</li>
+      <li>CSS → Car ka paint & design</li>
+      <li>JavaScript → Engine jo car chalata hai</li>
+    </ul>
+    <hr />
+
+    <h1>2. Two ways of write the JavaScript</h1>
+    <p>
+      There are two ways to write JavaScript code in a web page: inline and
+      external.
+    </p>
+    <h2>1. Inline JavaScript</h2>
+    <p>
+      Inline JavaScript is written directly within the HTML elements using the
+      <code>onclick</code> attribute or other event attributes.
+    </p>
+    <h2 id="title-internal">Welcome</h2>
+    <script>
+      document.getElementById("title-internal").innerHTML =
+        "Hello from Inline JavaScript File!";
+    </script>
+
+    <h2>2. External JavaScript</h2>
+    <p>
+      External JavaScript is written in a separate file with a .js extension and
+      linked to the HTML document using the <code>&lt;script&gt;</code> tag.
+    </p>
+    <h2 id="title-external">Welcome</h2>
+    <script src="script.js"></script>
+    <hr />
+
+    <h1>3. Variables – Data Store karne ka Box</h1>
+    <p>
+      Variables are used to store data values. In JavaScript, you can declare
+      variables using <code>var</code>, <code>let</code>, or <code>const</code>.
+    </p>
+    <script>
+      var name = "Sharique"; // var → value change kar sakte
+      let age = 30; // let → value change kar sakte hai
+      const pi = 3.14; // const → change nahi kar sakte
+      console.log("Name:", name);
+      console.log("Age:", age);
+      console.log("Value of Pi:", pi);
+    </script>
+    <ul>
+      <li>Jab value change hone wali hai → let</li>
+      <li>Jab value fix hai → const</li>
+    </ul>
+    <hr />
+
+    <h1>4. Data Types – Data ka Type (Kis type ka data store ho raha hai)</h1>
+    <p>
+      JavaScript has different data types to represent various kinds of data.
+      The main data types are:
+    </p>
+    <ul>
+      <li>String: Textual data</li>
+      <li>Number: Numeric data</li>
+      <li>Boolean: True or false values</li>
+      <li>Null: empty value intentionally</li>
+      <li>Object: Complex data structures or Key Value</li>
+      <li>Array: Ordered list of values</li>
+    </ul>
+    <script>
+      let name = "Sharique Husain"; // String
+      let myage = 22; // Number
+      let isOnline = true; // Boolean
+      let emptyValue = null; // Null
+      let user = { name: "Alice", age: 25 }; // Object
+      let skills = ["HTML", "CSS", "JavaScript"]; // Array
+
+      console.log("Name:", name);
+      console.log("Age:", myage);
+      console.log("Is Active:", isOnline);
+      console.log("Empty Value:", emptyValue);
+      console.log("User Object:", user);
+      console.log("Skills Array:", skills);
+
+      console.log(typeof myage); // "number"
+      console.log(typeof skills); // "object"
+    </script>
+    <hr />
+
+    <h1>5. Type Conversion - Change the Data Type</h1>
+    <p>
+      Type conversion is the process of converting a value from one data type to
+      another. JavaScript can also explicitly convert types using functions like
+      <code>String()</code> and <code>Number()</code>.
+    </p>
+    <h3>Convert String to Number</h3>
+    <script>
+      let strNumber = "123";
+      let convertedNumber = Number(strNumber);
+      console.log("Converted Number:", convertedNumber); // 123
+      console.log(typeof convertedNumber); // "number"
+    </script>
+    <h3>Convert Number to String</h3>
+    <script>
+      let num = 456;
+      let convertedString = String(num);
+      console.log("Converted String:", convertedString); // "456"
+      console.log(typeof convertedString); // "string"
+    </script>
+    <hr />
+
+    <h1>6. Operators - Mathematical Operations</h1>
+    <p>
+      Operators are used to perform operations on variables and values.
+      JavaScript supports various types of operators, including arithmetic,
+      assignment, comparison, logical, and more.
+    </p>
+    <h3>Arithmetic Operators</h3>
+    <script>
+      let a = 10;
+      let b = 5;
+      console.log("Addition:", a + b); // 15
+      console.log("Subtraction:", a - b); // 5
+      console.log("Multiplication:", a * b); // 50
+      console.log("Division:", a / b); // 2
+      console.log("Modulus:", a % b); // 0
+      console.log("Exponentiation:", a ** b); // 100000
+    </script>
+    <h3>Assignment Operators</h3>
+    <script>
+      let x = 10;
+      x += 5; // x = x + 5
+      console.log("After +=:", x); // 15
+      x -= 3; // x = x - 3
+      console.log("After -=:", x); // 12
+      x *= 2; // x = x * 2
+      console.log("After *=:", x); // 24
+      x /= 4; // x = x / 4
+      console.log("After /=:", x); // 6
+      x %= 2; // x = x % 2
+      console.log("After %=", x); // 0
+    </script>
+    <h3>String Operators</h3>
+    <script>
+      let firstName = "Sharique";
+      let lastName = "Husain";
+      let fullName = firstName + " " + lastName;
+      console.log("Full Name:", fullName); // "Sharique Husain"
+      console.log("Full Name Length:", fullName.length); // 15
+
+      //Template Literals
+      let newgreeting = `Hello, my name is ${firstName} ${lastName}.`;
+      console.log(newgreeting); // "Hello, my name is Sharique Husain."
+    </script>
+    <hr />
+
+    <h1>Mini Project – Hello User App</h1>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button id="btn">Say Hello</button>
+    <h2 id="greeting"></h2>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", function () {
+        let name = document.getElementById("username").value;
+        document.getElementById(
+          "greeting"
+        ).textContent = `Hello ${name}, Welcome to JavaScript!`;
+      });
+    </script>
+  </body>
+</html>
+

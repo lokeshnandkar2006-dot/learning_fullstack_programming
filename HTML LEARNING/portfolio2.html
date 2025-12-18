@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+:root {
+    --primary-color: #ad2f57; 
+     --secondary-color: #2fad61;
+    --text-color: #333;
+    --background-color:linear-gradient(
+          135deg,
+          #219b4c,
+          #7631af
+        ); 
+    --background:linear-gradient(
+          135deg,
+          #b193d1,
+          #45867e
+        ); ;
+    --card-bg-color:linear-gradient(
+          135deg,
+          #21829b,
+          #af319c
+        ); 
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    scroll-behavior: smooth;
+}
+
+/* --- Utility Classes --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* --- Header & Navigation --- */
+header {
+    background: var(--background);
+    color: var(--text-color);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    position: sticky; /* Keeps the header at the top */
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Hero/About Section --- */
+.hero {
+    background-image: url('https://via.placeholder.com/1920x1080?text=Background+Image'); /* Replace with your own image URL */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 20%; /* Makes the image a circle */
+    object-fit: cover;
+    
+}
+
+.btn {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #2980b9; /* Slightly darker blue */
+}
+
+/* --- Projects Section --- */
+#projects h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.project-card {
+    background: var(--card-bg-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.project-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.project-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- Contact Section --- */
+.contact-section {
+    text-align: center;
+    background: #b5acc0; /* A slight variation for contrast */
+}
+
+.contact-section p {
+    margin: 10px 0;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--text-color);
+    color: white;
+    font-size: 10px;
+    text-align: left;
+    padding: 15px 0;
+}
+
+/* --- Responsive Design (Simple Media Query) --- */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column; /* Stacks items vertically */
+        text-align: center;
+        min-height: auto;
+    }
+
+    .hero-content {
+        order: 2; /* Content after the image on mobile */
+    }
+
+    .profile-img {
+        margin-bottom: 30px;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 5px 10px;
+    }
+}</style>
+
+
+    <header>
+        <div class="logo">Lokesh Nandkar</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Lokesh Nandkar 👋</h1>
+            <h2>Student</h2>
+            <p>A beginner of HTML, CSS</p>
+            
+        </div>
+        <img src="LOKESH.jpg" alt="" class="profile-img">
+    </section>
+
+    <section id="projects" class="container">
+        <h2>My Projects</h2>
+
+        <div class="project-card">
+            <h3>Project One: E-Commerce Site</h3>
+            <p>A online store built with HTML forms and basic CSS layout.</p>
+            <button class="btn">View Project</button>
+        </div>
+
+        <div class="project-card">
+            <h3>Project two: A Photo Gallery Layout</h3>
+            <p>a gallery that store your photo with memories .</p>
+            <button class="btn">View Project</button>
+        </div>
+        
+    </section>
+
+    <section id="contact" class="container contact-section">
+        <h2>Contact Me</h2>
+        <p>I'm currently looking for new opportunities. Feel free to reach out!</p>
+        <p>Email:"lokeshnandkar2006@gmail.com"</p>
+        <p>instagram: "https://www.instagram.com/lokeshnandkar/?next=%2F"></p>
+        
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Lokesh Nandkar Portfolio</p>
+    </footer>
+
+</body>
+</html>

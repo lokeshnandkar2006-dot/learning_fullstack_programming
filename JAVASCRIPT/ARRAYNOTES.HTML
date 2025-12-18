@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 3</title>
+  </head>
+  <body>
+    <h1>Arrays And Objects</h1>
+    <hr />
+
+    <h2>ARRAYS</h2>
+    <p>
+      An array is a special variable that can hold more than one value at a
+      time. Arrays are ordered collections of items. Think of them as a list
+      where each item has a position (index) starting from 0.
+    </p>
+    <hr />
+
+    <h3>Creating an Array</h3>
+    <script>
+      // Creating arrays
+      let fruits = ["apple", "banana", "orange"];
+
+      // Accessing elements (zero-indexed)
+      console.log(fruits[1]); // 'banana'
+      console.log(fruits[2]); // 'orange'
+
+      // Array length
+      console.log(fruits.length); // 3
+
+      // Modifying elements
+      fruits[1] = "Papaya"; // Change 'banana' to 'mango'
+      console.log(fruits); // ['apple', 'mango', 'orange']
+    </script>
+    <hr />
+
+    <h3>Common Array Methods</h3>
+    <script>
+      let colors = ["red", "green", "blue"];
+
+      // Adding an element to the end
+      colors.push("yellow");
+      console.log(colors); // ['red', 'green', 'blue', 'yellow']
+
+      // Removing the last element
+      colors.pop();
+      console.log(colors); // ['red', 'green', 'blue']
+
+      // Adding an element to the beginning
+      colors.unshift("purple");
+      console.log(colors); // ['purple', 'red', 'green', 'blue']
+
+      // Removing the first element
+      colors.shift();
+      console.log(colors); // ['red', 'green', 'blue']
+    </script>
+    <hr />
+
+    <h3>Searching in Arrays:</h3>
+    <script>
+      let numbers = [10, 20, 30, 40, 50];
+
+      // Finding the index of an element
+      let index = numbers.indexOf(10);
+      console.log(index); // 2
+
+      // Checking if an element exists
+      let exists = numbers.includes(41);
+      console.log(exists); // true
+    </script>
+    <hr />
+
+    <h3>Slicing and Splicing:</h3>
+    <script>
+      let letters = ["a", "b", "c", "d", "e"];
+
+      // Slicing (creates a new array)
+      let subArray = letters.slice(3, 4); // from index 1 to 3
+      console.log(subArray); // ['b', 'c', 'd']
+
+      // Splicing (modifies the original array)
+      letters.splice(2, 3, "x", "y", "z", "A"); // at index 2, remove 1 item, add 'x' and 'y'
+      console.log(letters); // ['a', 'b', 'x', 'y', 'd', 'e']
+    </script>
+    <hr />
+
+    <h3>Array Destructuring</h3>
+    <script>
+      let colors1 = ["red", "green", "blue"];
+
+      let [first, second, third] = colors;
+      console.log(first); // 'red'
+      console.log(second); // 'green'
+
+      // Skip elements
+      let [primary, , tertiary] = colors;
+      console.log(primary); // 'red'
+      console.log(tertiary); // 'blue'
+    </script>
+
+    <h2>OBJECTS</h2>
+    <p>
+      An object is a collection of properties, where each property is defined as
+      a key-value pair. Objects are used to store related data and functionality
+      together. Objects are collections of key-value pairs. They represent
+      real-world entities with properties.
+    </p>
+    <hr />
+
+    <h3>Creating an Object</h3>
+    <script>
+      // Creating objects
+      let person = {
+        name: "Raj",
+        age: 30,
+        city: "Mumbai",
+        isStudent: false,
+      };
+
+      // Accessing properties (two ways)
+      console.log(person.name); // 'Raj' (dot notation)
+      console.log(person["age"]); // 30 (bracket notation)
+
+      // Adding new properties
+      person.email = "raj@example.com";
+
+      // Modifying properties
+      person.age = 31;
+
+      // Deleting properties
+      delete person.city;
+
+      console.log(person);
+      // { name: 'Raj', age: 31, isStudent: false, email: 'raj@example.com' }
+    </script>
+    <hr />
+
+    <h3>Object Methods</h3>
+    <script>
+      let calculator = {
+        value: 0,
+        add: function (num) {
+          this.value += num;
+          return this.value;
+        },
+        subtract: function (num) {
+          this.value -= num;
+          return this.value;
+        },
+        reset: function () {
+          this.value = 0;
+        },
+      };
+
+      console.log(calculator.add(10)); // 10
+      console.log(calculator.add(5)); // 15
+      console.log(calculator.subtract(3)); // 12
+      calculator.reset(); // resets value to 0
+      console.log(calculator.value); // 0
+    </script>
+    <hr />
+
+    <h3>Nested Objects and Arrays</h3>
+    <script>
+      // Array of objects (very common in web dev)
+      let products = [
+        {
+          id: 1,
+          name: "Laptop",
+          price: 999,
+          specs: {
+            ram: "16GB",
+            storage: "512GB",
+          },
+        },
+        {
+          id: 2,
+          name: "Mouse",
+          price: 29,
+          specs: {
+            wireless: true,
+            color: "black",
+          },
+        },
+      ];
+
+      // Accessing nested data
+      console.log(products[0].name); // 'Laptop'
+      console.log(products[0].specs.ram); // '16GB'
+      console.log(products[1].specs.wireless); // true
+    </script>
+    <hr />
+
+    <h3>Object Destructuring</h3>
+    <script>
+      let user = {
+        name: "Alice",
+        age: 28,
+        email: "alice@example.com",
+      };
+
+      // Old way
+      let name1 = user.name;
+      let age1 = user.age;
+
+      // Destructuring (shorter)
+      let { name2, age2, email } = user;
+      console.log(name2); // 'Alice'
+      console.log(age2); // 28
+    </script>
+    <hr />
+
+    <h3>Spread Operator (...)</h3>
+    <script>
+      // Copy arrays
+      let fruits = ["apple", "banana"];
+      let moreFruits = [...fruits, "orange", "mango"];
+      console.log(moreFruits); // ['apple', 'banana', 'orange', 'mango']
+
+      // Combine arrays
+      let arr1 = [1, 2];
+      let arr2 = [3, 4];
+      let combined = [...arr1, ...arr2];
+      console.log(combined); // [1, 2, 3, 4]
+
+      // Copy objects
+      let person = { name: "John", age: 30 };
+      let updatedPerson = { ...person, city: "NYC" };
+      console.log(updatedPerson); // { name: 'John', age: 30, city: 'NYC' }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      h1 {
+        color: #667eea;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 32px;
+      }
+
+      .input-section {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      #todoInput {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+
+      #todoInput:focus {
+        border-color: #667eea;
+      }
+
+      #addBtn {
+        padding: 12px 25px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      #addBtn:hover {
+        background: #5568d3;
+      }
+
+      #todoList {
+        list-style: none;
+      }
+
+      .todo-item {
+        background: #f8f9fa;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .todo-text {
+        flex: 1;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .todo-item.completed .todo-text {
+        text-decoration: line-through;
+        color: #999;
+      }
+
+      .delete-btn {
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+
+      .delete-btn:hover {
+        background: #ee5a6f;
+      }
+
+      .empty-message {
+        text-align: center;
+        color: #999;
+        padding: 30px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+
+      <div class="input-section">
+        <input type="text" id="todoInput" placeholder="Enter your task..." />
+        <button id="addBtn">Add Task</button>
+      </div>
+
+      <ul id="todoList">
+        <li class="empty-message">No tasks yet! Add one to get started.</li>
+      </ul>
+    </div>
+
+    <script>
+      // Elements ko select karna
+      const todoInput = document.getElementById("todoInput");
+      const addBtn = document.getElementById("addBtn");
+      const todoList = document.getElementById("todoList");
+
+      // Function: Task add karna
+      function addTask() {
+        const taskText = todoInput.value.trim();
+
+        // Empty check
+        if (taskText === "") {
+          alert("Please enter a task!");
+          return;
+        }
+
+        // Empty message remove karna
+        const emptyMsg = document.querySelector(".empty-message");
+        if (emptyMsg) {
+          emptyMsg.remove();
+        }
+
+        // Naya list item create karna (Creating Element)
+        const li = document.createElement("li");
+        li.className = "todo-item";
+
+        // Task text add karna
+        const span = document.createElement("span");
+        span.className = "todo-text";
+        span.textContent = taskText; // Changing text content
+
+        // Delete button create karna
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.textContent = "Delete";
+
+        // Delete button click event
+        deleteBtn.addEventListener("click", function () {
+          li.remove(); // Removing element
+
+          // Agar koi task nahi bacha to empty message dikhana
+          if (todoList.children.length === 0) {
+            const emptyLi = document.createElement("li");
+            emptyLi.className = "empty-message";
+            emptyLi.textContent = "No tasks yet! Add one to get started.";
+            todoList.appendChild(emptyLi);
+          }
+        });
+
+        // Task ko complete mark karna (click se)
+        span.addEventListener("click", function () {
+          li.classList.toggle("completed"); // Changing styles via class
+        });
+
+        // Elements ko assemble karna
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+
+        // List mein add karna (Adding to DOM)
+        todoList.appendChild(li);
+
+        // Input field ko clear karna
+        todoInput.value = "";
+        todoInput.focus();
+      }
+
+      // Button click event
+      addBtn.addEventListener("click", addTask);
+
+      // Enter key press event
+      todoInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          addTask();
+        }
+      });
+    </script>
+  </body>
+</html>

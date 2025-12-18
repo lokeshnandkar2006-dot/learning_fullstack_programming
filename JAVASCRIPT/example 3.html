@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 2</title>
+  </head>
+  <body>
+    <h1>Conditions + Loops (The Logic Behind All Websites)</h1>
+    <p>
+      Conditions and loops are fundamental concepts in programming that allow
+      developers to control the flow of their code based on certain criteria and
+      repeat actions multiple times.
+    </p>
+    <hr />
+
+    <h2>1. Conditional Statements</h2>
+    <p>
+      Conditional statements allow you to execute different blocks of code based
+      on whether a specified condition is true or false. The most common
+      conditional statements in JavaScript are <code>if / else</code>,
+      <code>else-if</code>, and <code>switch.</code>.
+    </p>
+    <hr />
+
+    <h3>IF Statement</h3>
+    <p>
+      The <code>if</code> statement executes a block of code if a specified
+      condition is true.
+    </p>
+    <script>
+      let age = 17;
+
+      if (age <= 18) {
+        console.log("You can vote");
+      }
+    </script>
+    <hr />
+
+    <h3>IF...ELSE Statement</h3>
+    <p>
+      The <code>if...else</code> statement executes one block of code if a
+      specified condition is true, and another block if it is false.
+    </p>
+    <script>
+      let age2 = 26;
+
+      if (age2 >= 18) {
+        console.log("Adult");
+      } else {
+        console.log("Minor");
+      }
+    </script>
+    <hr />
+
+    <h3>IF...ELSE..IF Statement</h3>
+    <p>
+      The <code>if...else if...else</code> statement allows you to test multiple
+      conditions.
+    </p>
+    <script>
+      let score = 85;
+
+      if (score >= 90) {
+        console.log("Grade A");
+      } else if (score >= 80) {
+        console.log("Grade B");
+      } else if (score >= 70) {
+        console.log("Grade C");
+      } else {
+        console.log("Grade F");
+      }
+    </script>
+    <hr />
+
+    <h2>NESTED CONDITIONS</h2>
+    <p>
+      Nested conditions are conditional statements placed inside other
+      conditional statements. This allows for more complex decision-making
+      processes in your code.
+    </p>
+    <script>
+      let username = "admin";
+      let password = "123456";
+
+      if (username === "admin") {
+        if (password === "1234") {
+          console.log("Login Successful");
+        } else {
+          console.log("Wrong Password");
+        }
+      } else {
+        console.log("Username not found");
+      }
+    </script>
+    <hr />
+
+    <h2>TERNARY OPERATOR</h2>
+    <p>
+      The ternary operator is a shorthand way of writing an
+      <code>if...else</code>
+      statement. It takes three operands: a condition, a value if the condition
+      is true, and a value if the condition is false.
+    </p>
+    <script>
+      let age3 = 15;
+      let canVote = age3 >= 18 ? "Yes, you can vote." : "No, you cannot vote.";
+      console.log(canVote);
+    </script>
+    <hr />
+
+    <h2>SWITCH Statement</h2>
+    <p>
+      The <code>switch</code> statement is used to perform different actions
+      based on different conditions. It is often used as an alternative to
+      multiple <code>if...else if</code> statements.
+    </p>
+    <script>
+      let day = 10;
+      let dayName;
+
+      switch (day) {
+        case 1:
+          dayName = "Monday";
+          break;
+        case 2:
+          dayName = "Tuesday";
+          break;
+        case 3:
+          dayName = "Wednesday";
+          break;
+        case 4:
+          dayName = "Thursday";
+          break;
+        case 5:
+          dayName = "Friday";
+          break;
+        case 6:
+          dayName = "Saturday";
+          break;
+        case 7:
+          dayName = "Sunday";
+          break;
+        default:
+          dayName = "Invalid day";
+      }
+
+      console.log("Today is:", dayName);
+    </script>
+    <hr />
+
+    <h2>2. LOOPS (for, while, do-while, for-of, for-in)</h2>
+    <p>
+      Loops are used to repeat a block of code multiple times until a certain
+      condition is met. JavaScript provides several types of loops, including
+      <code>for</code>, <code>while</code>, <code>do-while</code>,
+      <code>for-of</code>, and <code>for-in</code>.
+    </p>
+    <hr />
+
+    <h3>FOR Loop</h3>
+    <p>
+      The <code>for</code> loop is used to repeat a block of code a specific
+      number of times.
+    </p>
+    <script>
+      for (let i = 1; i <= 5; i++) {
+        console.log("Iteration:", i);
+      }
+    </script>
+    <hr />
+
+    <h3>WHILE Loop</h3>
+    <p>
+      The <code>while</code> loop repeats a block of code as long as a specified
+      condition is true.
+    </p>
+    <script>
+      let count = 1;
+
+      while (count <= 5) {
+        console.log("Count:", count);
+        count++;
+      }
+    </script>
+    <hr />
+
+    <h3>DO-WHILE Loop</h3>
+    <p>
+      The <code>do-while</code> loop is similar to the <code>while</code> loop,
+      but it guarantees that the block of code will be executed at least once
+      before checking the condition.
+    </p>
+    <script>
+      let num = 1;
+
+      do {
+        console.log("Number:", num);
+        num++;
+      } while (num <= 5);
+    </script>
+    <hr />
+
+    <h3>FOR-OF Loop</h3>
+    <p>
+      The <code>for-of</code> loop is used to iterate over iterable objects
+      (like arrays, strings, etc.).
+    </p>
+    <script>
+      let fruits = ["Apple", "Banana", "Cherry"];
+
+      for (let fruit of fruits) {
+        console.log("Fruit:", fruit);
+      }
+    </script>
+    <hr />
+
+    <h3>FOR-IN Loop</h3>
+    <p>
+      The <code>for-in</code> loop is used to iterate over the properties of an
+      object.
+    </p>
+    <script>
+      let person = {
+        name: "John",
+        age: 30,
+        city: "New York",
+      };
+
+      for (let key in person) {
+        console.log(`${key}: ${person[key]}`);
+      }
+    </script>
+    <hr />
+
+    <h2>BREAK + CONTINUE</h2>
+    <p>
+      The <code>break</code> and <code>continue</code> statements are used to
+      control the flow of loops.
+    </p>
+    <script>
+      // Break Example
+      for (let i = 1; i <= 10; i++) {
+        if (i === 6) {
+          break; // Exit the loop when i is 6
+        }
+        console.log("Break Example - Number:", i);
+      }
+
+      // Continue Example
+      for (let j = 1; j <= 10; j++) {
+        if (j % 2 === 0) {
+          continue; // Skip even numbers
+        }
+        console.log("Continue Example - Odd Number:", j);
+      }
+    </script>
+    <hr />
+  </body>
+</html>

@@ -1,0 +1,477 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Landing Section</title>
+    <style>
+      /* CSS Variables - reusable values */
+      :root {
+        --primary: #ff6b6b; /* Red */
+        --secondary: #4ecdc4; /* Teal */
+        --dark: #2c3e50; /* Dark blue */
+        --light: #ecf0f1; /* Light gray */
+        --white: #ffffff;
+        --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: var(--light);
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        background-color: var(--white); /* White background */
+        padding: 20px 50px; /* Padding */
+        display: flex; /* Flex layout */
+        justify-content: space-between; /* Space between items */
+        align-items: center; /* Vertical center */
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Shadow */
+        position: sticky; /* Sticky positioning - scroll pe top pe rahega */
+        top: 0; /* Top se 0 */
+        z-index: 1000; /* Sabse upar */
+      }
+
+      .logo {
+        font-size: 28px; /* Bada font */
+        font-weight: bold; /* Bold */
+        background: var(--gradient); /* Gradient */
+        -webkit-background-clip: text; /* Text ke shape me gradient */
+        -webkit-text-fill-color: transparent; /* Text transparent taaki gradient dikhe */
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex; /* Flex layout */
+        list-style: none; /* Bullets remove */
+        gap: 35px; /* Links ke beech gap */
+      }
+
+      .nav-links a {
+        text-decoration: none; /* Underline remove */
+        color: var(--dark); /* Dark color */
+        font-weight: 500; /* Medium weight */
+        position: relative; /* Underline effect ke liye */
+        transition: 0.3s; /* Smooth transition */
+      }
+
+      /* Animated underline - ::after pseudo-element */
+      .nav-links a::after {
+        content: ""; /* Empty content */
+        position: absolute; /* Link ke relative to */
+        bottom: -5px; /* Link ke neeche */
+        left: 0; /* Left se start */
+        width: 0; /* Initially width 0 - invisible */
+        height: 2px; /* Height 2px */
+        background: var(--gradient); /* Gradient underline */
+        transition: 0.3s; /* Smooth transition */
+      }
+
+      /* Hover pe underline full width ho jaye */
+      .nav-links a:hover::after {
+        width: 100%; /* Full width */
+      }
+
+      .nav-links a:hover {
+        color: var(--primary); /* Color change */
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: var(--gradient); /* Gradient background */
+        padding: 100px 50px; /* Badi padding */
+        display: flex; /* Flex layout */
+        justify-content: space-between; /* Space between content */
+        align-items: center; /* Vertical center */
+        min-height: 600px; /* Minimum height */
+        position: relative; /* Animated shapes ke liye */
+        overflow: hidden; /* Bahar ki content hide */
+      }
+
+      /* Animated background shapes - ::before pseudo-element */
+      .hero-section::before {
+        content: ""; /* Empty content */
+        position: absolute; /* Section ke relative to */
+        width: 400px; /* Circle ki width */
+        height: 400px; /* Circle ki height */
+        background: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Light white with transparency */
+        border-radius: 50%; /* Perfect circle */
+        top: -150px; /* Partially upar se bahar */
+        right: -150px; /* Partially right se bahar */
+        animation: float 6s ease-in-out infinite; /* Floating animation */
+      }
+
+      /* Dusra animated shape - ::after pseudo-element */
+      .hero-section::after {
+        content: ""; /* Empty content */
+        position: absolute; /* Absolute position */
+        width: 300px; /* Width */
+        height: 300px; /* Height */
+        background: rgba(255, 255, 255, 0.08); /* More transparent */
+        border-radius: 50%; /* Circle */
+        bottom: -100px; /* Partially neeche se bahar */
+        left: -100px; /* Partially left se bahar */
+        animation: float 8s ease-in-out infinite; /* Slower animation */
+      }
+
+      /* Float animation for shapes */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg); /* Start aur end position */
+        }
+        50% {
+          transform: translateY(-30px) rotate(180deg); /* Middle me upar aur rotate */
+        }
+      }
+
+      /* Hero content - text part */
+      .hero-content {
+        flex: 1; /* Available space le le */
+        color: var(--white); /* White text */
+        z-index: 1; /* Shapes ke upar */
+        max-width: 600px; /* Maximum width */
+      }
+
+      .hero-content h1 {
+        font-size: 56px; /* Bahut bada font */
+        margin-bottom: 20px; /* Neeche space */
+        line-height: 1.2; /* Line height */
+        animation: fadeInLeft 1s ease; /* Fade in from left animation */
+      }
+
+      /* Fade in from left animation */
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0; /* Transparent */
+          transform: translateX(-50px); /* Left se 50px */
+        }
+        to {
+          opacity: 1; /* Visible */
+          transform: translateX(0); /* Normal position */
+        }
+      }
+
+      .hero-content p {
+        font-size: 20px; /* Medium font */
+        margin-bottom: 35px; /* Neeche space */
+        line-height: 1.6; /* Line spacing */
+        opacity: 0.95; /* Slightly transparent */
+        animation: fadeInLeft 1s ease 0.3s backwards; /* Delay ke saath animation */
+      }
+
+      /* CTA Buttons container */
+      .cta-buttons {
+        display: flex; /* Flex layout */
+        gap: 20px; /* Buttons ke beech gap */
+        animation: fadeInLeft 1s ease 0.6s backwards; /* More delay */
+      }
+
+      /* Primary CTA button */
+      .btn-primary {
+        padding: 16px 40px; /* Badi padding */
+        background-color: var(--white); /* White background */
+        color: var(--primary); /* Colored text */
+        border: none; /* Border remove */
+        border-radius: 30px; /* Fully rounded */
+        font-size: 16px; /* Font size */
+        font-weight: bold; /* Bold */
+        cursor: pointer; /* Pointer cursor */
+        transition: 0.3s; /* Smooth transition */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Shadow */
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px); /* Upar move */
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Bada shadow */
+      }
+
+      /* Secondary button */
+      .btn-secondary {
+        padding: 16px 40px; /* Same padding */
+        background-color: transparent; /* Transparent background */
+        color: var(--white); /* White text */
+        border: 2px solid var(--white); /* White border */
+        border-radius: 30px; /* Rounded */
+        font-size: 16px; /* Font size */
+        font-weight: bold; /* Bold */
+        cursor: pointer; /* Pointer */
+        transition: 0.3s; /* Smooth */
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--white); /* White background */
+        color: var(--primary); /* Colored text */
+        transform: translateY(-3px); /* Upar move */
+      }
+
+      /* Hero image part */
+      .hero-image {
+        flex: 1; /* Available space */
+        display: flex; /* Flex for centering */
+        justify-content: center; /* Center */
+        align-items: center; /* Center */
+        z-index: 1; /* Shapes ke upar */
+      }
+
+      .hero-image img {
+        max-width: 100%; /* Image container se bahar na jaye */
+        height: auto; /* Height automatic */
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3)); /* Image shadow */
+        animation: fadeInRight 1s ease; /* Fade in from right */
+      }
+
+      /* Fade in from right animation */
+      @keyframes fadeInRight {
+        from {
+          opacity: 0; /* Transparent */
+          transform: translateX(50px); /* Right se 50px */
+        }
+        to {
+          opacity: 1; /* Visible */
+          transform: translateX(0); /* Normal position */
+        }
+      }
+
+      /* Features Section */
+      .features-section {
+        padding: 80px 50px; /* Badi padding */
+        background-color: var(--white); /* White background */
+      }
+
+      .section-title {
+        text-align: center; /* Center align */
+        font-size: 42px; /* Bada font */
+        color: var(--dark); /* Dark color */
+        margin-bottom: 60px; /* Neeche space */
+      }
+
+      /* Features grid */
+      .features-grid {
+        display: grid; /* Grid layout */
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        gap: 40px; /* Grid items ke beech gap */
+        max-width: 1200px; /* Maximum width */
+        margin: 0 auto; /* Center align */
+      }
+
+      /* Feature card */
+      .feature-card {
+        padding: 35px; /* Padding */
+        background-color: var(--light); /* Light background */
+        border-radius: 15px; /* Rounded corners */
+        text-align: center; /* Center text */
+        transition: 0.3s; /* Smooth transition */
+        cursor: pointer; /* Pointer cursor */
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px); /* Upar move */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); /* Shadow */
+        background: var(--gradient); /* Gradient background */
+        color: var(--white); /* White text */
+      }
+
+      .feature-icon {
+        font-size: 60px; /* Bada icon */
+        margin-bottom: 20px; /* Neeche space */
+        display: inline-block; /* Inline block for animation */
+        transition: 0.3s; /* Smooth */
+      }
+
+      /* Icon hover pe rotate ho */
+      .feature-card:hover .feature-icon {
+        transform: rotateY(360deg); /* 360 degree rotate */
+      }
+
+      .feature-card h3 {
+        font-size: 24px; /* Font size */
+        margin-bottom: 15px; /* Neeche space */
+      }
+
+      .feature-card p {
+        line-height: 1.6; /* Line spacing */
+        opacity: 0.9; /* Slightly transparent */
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column; /* Vertical layout */
+          padding: 20px; /* Kam padding */
+          gap: 15px; /* Gap */
+        }
+
+        .nav-links {
+          flex-direction: column; /* Vertical links */
+          gap: 15px; /* Kam gap */
+        }
+
+        .hero-section {
+          flex-direction: column; /* Vertical layout */
+          padding: 60px 20px; /* Kam padding */
+          text-align: center; /* Center text */
+        }
+
+        .hero-content h1 {
+          font-size: 36px; /* Chota font */
+        }
+
+        .hero-content p {
+          font-size: 16px; /* Chota font */
+        }
+
+        .cta-buttons {
+          flex-direction: column; /* Vertical buttons */
+          width: 100%; /* Full width */
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          width: 100%; /* Full width buttons */
+        }
+
+        .hero-image {
+          margin-top: 30px; /* Upar space */
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr; /* Single column */
+          gap: 25px; /* Kam gap */
+        }
+
+        .features-section {
+          padding: 50px 20px; /* Kam padding */
+        }
+
+        .section-title {
+          font-size: 32px; /* Chota heading */
+        }
+      }
+
+      /* Tablet Responsive */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        }
+
+        .hero-content h1 {
+          font-size: 44px; /* Medium size */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">WebMaster</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Build Amazing Websites With Us</h1>
+        <p>
+          Create stunning, responsive websites that convert visitors into
+          customers. Join thousands of successful businesses using our platform.
+        </p>
+        <div class="cta-buttons">
+          <button class="btn-primary">Get Started Free</button>
+          <button class="btn-secondary">Watch Demo</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3079/3079652.png"
+          alt="Hero Illustration"
+        />
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2 class="section-title">Why Choose Us?</h2>
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>
+            Optimized performance ensures your website loads in milliseconds,
+            keeping visitors engaged.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Fully Responsive</h3>
+          <p>
+            Your website looks perfect on all devices - desktop, tablet, and
+            mobile phones.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Beautiful Design</h3>
+          <p>
+            Modern, clean designs that captivate your audience and build trust
+            instantly.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure & Safe</h3>
+          <p>
+            Enterprise-grade security keeps your data and your customers'
+            information protected.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>SEO Optimized</h3>
+          <p>
+            Built-in SEO features help your website rank higher on Google and
+            get more traffic.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>24/7 Support</h3>
+          <p>
+            Our expert team is always ready to help you succeed, anytime you
+            need assistance.
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

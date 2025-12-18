@@ -1,0 +1,161 @@
+				 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interactive Profile Card - Purvesh</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0c10;          /* dark background */
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .user-form {
+        display: grid;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .user-form input,
+      .user-form select {
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1em;
+      }
+
+      .user-form button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .user-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+      }
+
+      .user-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .user-card h3 {
+        margin-bottom: 10px;
+      }
+
+      .user-card p {
+        margin: 5px 0;
+        opacity: 0.9;
+      }
+
+      .user-card button {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+  </style>
+</head>
+<body><section class="example-box">
+        <h2>
+          <i class="fas fa-users"></i> Example 2: User Dashboard (Object
+          Manipulation & Destructuring)
+        </h2>
+
+        <form class="user-form" id="userForm">
+          <input type="text" id="userName" placeholder="Name" required />
+          <input type="email" id="userEmail" placeholder="Email" required />
+          <input type="number" id="userAge" placeholder="Age" required />
+          <select title="User" id="userRole">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+            <option value="moderator">Moderator</option>
+          </select>
+          <button type="submit">Add User</button>
+        </form>
+
+        <div class="user-cards" id="userCards"></div>
+      </section>
+  
+  <script>
+   .getElementById("userForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Object destructuring from form values
+          const name = document.getElementById("userName").value;
+          const email = document.getElementById("userEmail").value;
+          const age = document.getElementById("userAge").value;
+          const role = document.getElementById("userRole").value;
+
+          // Create new user object
+          const newUser = {
+            id: users.length + 1,
+            name: name,
+            email: email,
+            age: parseInt(age),
+            role: role,
+          };
+
+          // push() adds to array
+          users.push(newUser);
+          displayUsers();
+
+          // Reset form
+          this.reset();
+        });
+
+      // Display users using destructuring
+      function displayUsers() {
+        const userCards = document.getElementById("userCards");
+
+        userCards.innerHTML = users
+          .map((user) => {
+            // Destructuring object properties
+            const { id, name, email, age, role } = user;
+
+            return `
+                    <div class="user-card">
+                        <h3>${name}</h3>
+                        <p><i class="fas fa-envelope"></i> ${email}</p>
+                        <p><i class="fas fa-birthday-cake"></i> Age: ${age}</p>
+                        <p><i class="fas fa-user"></i> Role: ${role}</p>
+                        <button onclick="deleteUser(${id})">Delete</button>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      // Delete user using filter()
+      function deleteUser(userId) {
+        users = users.filter((user) => user.id !== userId);
+        displayUsers();
+      }
+  </script>
+</body>
+</html>

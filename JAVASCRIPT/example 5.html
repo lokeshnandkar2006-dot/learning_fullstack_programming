@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Price Calculator</title>
+
+    <style>
+      /* ----------------------------------------------------
+           GLOBAL STYLING
+        ---------------------------------------------------- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #1f2f98, #3f74e8);
+        padding: 20px;
+      }
+
+      /* ----------------------------------------------------
+           CONTAINER
+        ---------------------------------------------------- */
+      .calculator {
+        width: 420px;
+        max-width: 90%;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 0.6s ease;
+      }
+
+      .calculator h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #1f2f98;
+        letter-spacing: 0.5px;
+      }
+
+      /* ----------------------------------------------------
+           INPUT GROUP
+        ---------------------------------------------------- */
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 8px;
+        display: block;
+        color: #333;
+        letter-spacing: 0.3px;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: #3f74e8;
+        box-shadow: 0 0 5px rgba(63, 116, 232, 0.5);
+      }
+
+      /* ----------------------------------------------------
+           BUTTONS
+        ---------------------------------------------------- */
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      button {
+        flex: 1;
+        padding: 14px;
+        background: #1f2f98;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      button:hover {
+        background: #162477;
+        transform: translateY(-2px);
+      }
+
+      .reset-btn {
+        background: #dc3545;
+      }
+
+      .reset-btn:hover {
+        background: #c82333;
+      }
+
+      /* ----------------------------------------------------
+           RESULT BOX
+        ---------------------------------------------------- */
+      .result-box {
+        margin-top: 25px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        min-height: 100px;
+      }
+
+      .result-box h3 {
+        font-size: 18px;
+        color: #1f2f98;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .result-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .result-item.final {
+        font-weight: 700;
+        font-size: 16px;
+        color: #1f2f98;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+      }
+
+      /* ----------------------------------------------------
+           ANIMATION
+        ---------------------------------------------------- */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ----------------------------------------------------
+           MOBILE RESPONSIVENESS
+        ---------------------------------------------------- */
+      @media (max-width: 480px) {
+        .calculator {
+          width: 100%;
+          padding: 20px;
+        }
+
+        .calculator h2 {
+          font-size: 20px;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        button {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="calculator">
+      <h2>Advanced Price Calculator</h2>
+
+      <div class="input-group">
+        <label>Original Price (₹)</label>
+        <input type="number" id="price" placeholder="e.g., 1000" step="0.01" />
+      </div>
+
+      <div class="input-group">
+        <label>Discount (%)</label>
+        <input type="number" id="discount" placeholder="e.g., 10" step="0.01" />
+      </div>
+
+      <div class="input-group">
+        <label>Tax Rate (%)</label>
+        <input type="number" id="tax" placeholder="e.g., 18" step="0.01" />
+      </div>
+
+      <div class="button-group">
+        <button onclick="handleCalculation()">Calculate</button>
+        <button class="reset-btn" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <div class="result-box">
+        <h3>Calculation Breakdown</h3>
+        <div id="resultContent">
+          <p>Enter values and click Calculate to see the breakdown.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ----------------------------------------------------
+           ADVANCED JS CONCEPTS USED:
+           ✔ Function Declarations & Expressions
+           ✔ Parameters & Return Values
+           ✔ Arrow Functions
+           ✔ Validation & Error Handling
+           ✔ Scope & Closures
+           ✔ Objects for Data Storage
+           ✔ Arrays for Step-by-Step Display
+           ✔ Math Operations & Rounding
+           ✔ DOM Manipulation
+           ✔ Event Handling
+        ---------------------------------------------------- */
+
+      // Main handler function (function declaration) - This function is called when the calculate button is clicked, orchestrating the entire calculation process
+      function handleCalculation() {
+        // Retrieve the original price from the input field and convert it to a floating-point number for mathematical operations
+        let price = parseFloat(document.getElementById("price").value);
+        // Retrieve the discount percentage from the input field and convert it to a floating-point number
+        let discount = parseFloat(document.getElementById("discount").value);
+        // Retrieve the tax rate percentage from the input field and convert it to a floating-point number
+        let tax = parseFloat(document.getElementById("tax").value);
+
+        // Call the validation function to check if the inputs are valid; store the result in validationMessage
+        let validationMessage = validateInputs(price, discount, tax);
+        // If validationMessage is not null (meaning there's an error), update the UI with the error message and stop execution
+        if (validationMessage) {
+          updateUI(validationMessage, null);
+          return;
+        }
+
+        // Call the performCalculations function to compute all the necessary values and store the result object
+        let calculations = performCalculations(price, discount, tax);
+
+        // Update the user interface with the calculation results, passing null for error since there is none
+        updateUI(null, calculations);
+      }
+
+      // Validation function (function expression) - This function checks if the input values are valid and returns an error message if not
+      const validateInputs = function (price, discount, tax) {
+        // Check if price is not a number or is less than or equal to zero; if so, return an error message
+        if (isNaN(price) || price <= 0) {
+          return "Please enter a valid positive price.";
+        }
+       
+ // Check if discount is not a number or is outside the range 0-100%; if so, return an error message
+        if (isNaN(discount) || discount < 0 || discount > 50) {
+          return "Discount must be between 0% and 50%.";
+        }
+        
+// Check if tax is not a number or is outside the range 0-50%; if so, return an error message
+        if (isNaN(tax) || tax < 0 || tax > 20) {
+          return "Tax rate must be between 0% and 20%.";
+        }
+      
+  // If all validations pass, return null indicating no errors
+        return null;
+      };
+
+      // Function to calculate the discount amount - This helper function computes the discount based on price and percentage
+      function calculateDiscountAmount(price, discountPercent) {
+        // Calculate and return the discount amount by multiplying price by discount percentage divided by 100
+        return price * (discountPercent / 100);
+      }
+
+      // Function to calculate the tax amount - This helper function computes the tax on a given amount
+      function calculateTaxAmount(amount, taxPercent) {
+        // Calculate and return the tax amount by multiplying the amount by tax percentage divided by 100
+        return amount * (taxPercent / 100);
+      }
+
+      // Function to round a value to two decimal places - This ensures currency values are displayed with two decimal places
+      function roundToTwoDecimals(value) {
+        // Multiply by 100, round to nearest integer, then divide by 100 to get two decimal places
+        return Math.round(value * 100) / 100;
+      }
+
+      // Main calculation logic (returns an object) - This function performs all calculations and returns a structured object with results
+      function performCalculations(price, discount, tax) {
+        
+// Calculate the discount amount using the helper function
+        let discountAmount = calculateDiscountAmount(price, discount);
+      
+  // Subtract the discount amount from the original price to get the discounted price
+        let discountedPrice = price - discountAmount;
+      
+  // Calculate the tax amount on the discounted price using the helper function
+        let taxAmount = calculateTaxAmount(discountedPrice, tax);
+   
+     // Add the tax amount to the discounted price to get the final price
+        let finalPrice = discountedPrice + taxAmount;
+
+        // Return an object containing all calculated values, rounded to two decimal places for display
+        return {
+          originalPrice: roundToTwoDecimals(price),
+          discountPercent: discount,
+          discountAmount: roundToTwoDecimals(discountAmount),
+          discountedPrice: roundToTwoDecimals(discountedPrice),
+          taxPercent: tax,
+          taxAmount: roundToTwoDecimals(taxAmount),
+          finalPrice: roundToTwoDecimals(finalPrice),
+        };
+      }
+
+      // UI Update function (arrow function) - This arrow function updates the DOM to display either an error or the calculation results
+      const updateUI = (error, calculations) => {
+        // Get the DOM element where results will be displayed
+        let resultContent = document.getElementById("resultContent");
+
+        // If there's an error, display it in red and stop further processing
+        if (error) {
+          resultContent.innerHTML = `<p style="color: #dc3545; font-weight: 600;">${error}</p>`;
+          return;
+        }
+
+        // Create an array of objects representing each line in the breakdown display
+        let breakdown = [
+          { label: "Original Price", value: `₹${calculations.originalPrice}` },
+          {
+            label: `Discount (${calculations.discountPercent}%)`,
+            value: `-₹${calculations.discountAmount}`,
+          },
+          {
+            label: "Price After Discount",
+            value: `₹${calculations.discountedPrice}`,
+          },
+          {
+            label: `Tax (${calculations.taxPercent}%)`,
+            value: `+₹${calculations.taxAmount}`,
+          },
+          {
+            label: "Final Price",
+            value: `₹${calculations.finalPrice}`,
+            isFinal: true,
+          },
+        ];
+
+        // Map the breakdown array to HTML strings, adding CSS classes for styling
+        let html = breakdown
+          .map(
+            (item) =>
+              `<div class="result-item ${item.isFinal ? "final" : ""}">
+            <span>${item.label}:</span>
+            <span>${item.value}</span>
+          </div>`
+          )
+          .join("");
+
+        // Set the inner HTML of the result content to the generated breakdown
+        resultContent.innerHTML = html;
+      };
+
+      // Reset function - This function clears all input fields and resets the result display to its initial state
+      function resetCalculator() {
+        
+// Clear the price input field
+        document.getElementById("price").value = "";
+
+        // Clear the discount input field
+        document.getElementById("discount").value = "";
+
+        // Clear the tax input field
+        document.getElementById("tax").value = "";
+
+        // Reset the result content to the default message
+        document.getElementById("resultContent").innerHTML =
+          "<p>Enter values and click Calculate to see the breakdown.</p>";
+      }
+    </script>
+  </body>
+</html>
