@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Day 7</title>
+  </head>
+  <body>
+    <h1>Local Storage / Session Storage</h1>
+    <p>
+      Local Storage and Session Storage are web storage objects that allow you
+      to store data in the browser.
+    </p>
+    <hr />
+
+    <h2>Local Storage</h2>
+    <p>
+      Local Storage allows you to store data with no expiration date. The data
+      will not be deleted when the browser is closed and will be available the
+      next day, week, or year.
+    </p>
+    <script>
+      // Storing a string
+      localStorage.setItem("username", "sharique29");
+
+      // Storing an object
+      const user = { name: "Sharique", age: 23 };
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Retrieving the object
+      const retrievedUser = JSON.parse(localStorage.getItem("user"));
+      console.log(retrievedUser); // Output: Sharique
+    </script>
+    <hr />
+
+    <h2>Session Storage</h2>
+    <p>
+      Session Storage is similar to Local Storage, but the data is deleted when
+      the browser tab is closed.
+    </p>
+    <script>
+      // Storing a string
+      sessionStorage.setItem("sessionName", "sessionUser");
+
+      // Storing an object
+      const sessionUser = { name: "SessionUser", age: 30 };
+      sessionStorage.setItem("sessionLocalUser", JSON.stringify(sessionUser));
+
+      // Retrieving the object
+      const retrievedSessionUser = JSON.parse(
+        sessionStorage.getItem("sessionUser")
+      );
+      console.log(retrievedSessionUser.name); // Output: SessionUser
+    </script>
+    <hr />
+
+    <h2>Key Differences</h2>
+    <ul>
+      <li>Local Storage data persists until explicitly deleted.</li>
+      <li>Session Storage data is deleted when the tab is closed.</li>
+      <li>Both can store up to 5-10MB of data depending on the browser.</li>
+    </ul>
+    <hr />
+  </body>
+</html>
